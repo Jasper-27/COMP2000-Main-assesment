@@ -13,13 +13,16 @@ public class main {
     }
     public static void main(String[] args) {
 
+        String dataFile = "stock.txt";
+        loadFile(dataFile);
 
 
-
-        String out = loadFile("stock.txt");
-        System.out.println(out);
 
         System.out.println(storeStock);
+//        System.out.println(storeStock.get(0).id);
+
+        
+
 
 
 
@@ -27,8 +30,7 @@ public class main {
     }
 
     //This functions reads the file and returns the contents
-    public static String loadFile(String file){
-
+    public static void loadFile(String file){
         Item tempItem = new Item(null, null, null);
         try {
             File myFile = new File(file);
@@ -41,47 +43,24 @@ public class main {
 
                 String[] arrOfStr = data.split(";", 3);
                 //System.out.println(arrOfStr);
-                System.out.println(arrOfStr[0] + arrOfStr[1] +  arrOfStr[2]);
+
 
                 try{
                     Float price = Float.valueOf(arrOfStr[1]);
                     Integer stock = Integer.valueOf(arrOfStr[2]);
-/*                    System.out.println("ID is " + arrOfStr[0]);
-                    System.out.println("Price is " + price);
-                    System.out.println("Stock is " + stock);*/
-
                     tempItem = new Item(arrOfStr[0], price, stock);
 
                     storeStock.add(tempItem);
 
-
-/*
-                    System.out.println("ID: " + tempItem.id + " Price: £" + tempItem.price + " Number in stock: " + tempItem.stock);
-*/
-
-
-
-
-
-                    //System.out.println(tempItem.output());
                 }catch(Exception e){
                     System.out.println(e);
                 }
-
-
-
-               //
-                System.out.println("__");
-
-
-
-                outString += data;
             }
             myReader.close();
-            return outString;
         } catch (FileNotFoundException e) { //Prints an error if the file is not found
             e.printStackTrace();
-            return "An error occurred.";
         }
     }
+
+
 }
