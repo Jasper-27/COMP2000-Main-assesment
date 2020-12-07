@@ -1,8 +1,8 @@
 public class Item {
 
-    static String id;
-    static Float price;
-    static Integer stock;
+    String id;
+    Float price;
+    Integer stock;
 
     //Constructor
     public Item(String in_id, Float in_price, Integer in_stock){
@@ -11,7 +11,7 @@ public class Item {
         stock =  in_stock;
     }
 
-    public static String output(){
+    public String output(){
         return (id + price + stock);
     }
 
