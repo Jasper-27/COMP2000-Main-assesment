@@ -23,7 +23,7 @@ public class main {
 
         loadFile(dataFile);
 
-        saveFile();
+        saveFile(dataFile);
 
 
 
@@ -70,11 +70,11 @@ public class main {
         System.out.println("File loading complete");
     }
 
-    public static void saveFile(){
+    public static void saveFile(String file){
         String outString;
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(dataFile));
+            writer = new BufferedWriter(new FileWriter(file));
 
             for (Item var : storeStock)
             {
