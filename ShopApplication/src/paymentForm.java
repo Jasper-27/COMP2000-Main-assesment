@@ -4,7 +4,7 @@ public class paymentForm {
     private JButton btn_cardPay;
     private JButton btn_cashPay;
     private JTextField tf_cashAmount;
-    private JPanel pnl_payment;
+    public JPanel pnl_payment;
 
     public static void main(String[] args) {
 

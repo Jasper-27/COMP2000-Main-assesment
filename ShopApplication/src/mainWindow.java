@@ -19,6 +19,8 @@ public class mainWindow {
     public static String dataFile = "stock.txt";
     public static List<String> scannedItems = new ArrayList();
 
+    public static JFrame frame = new JFrame("mainWindow");
+
 
 
     public mainWindow() {
@@ -34,7 +36,19 @@ public class mainWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 order(scannedItems);
+
+                //Changes to the payment window 
+                frame.setContentPane(new paymentForm().pnl_payment);
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                frame.pack();
+                //frame.setSize(500, 400);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
+        });
+        adminButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { }
         });
     }
 
@@ -91,12 +105,17 @@ public class mainWindow {
     public static void main(String[] args) {
         loadFile(dataFile);
 
-        JFrame frame = new JFrame("mainWindow");
+
         frame.setContentPane(new mainWindow().panel1);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(500, 400);
         frame.setVisible(true);
+
+
+        //JFrame pay_frame = new JFrame("receiptWindow");
+
+
 
     }
 
