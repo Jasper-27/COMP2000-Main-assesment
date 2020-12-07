@@ -1,4 +1,4 @@
-Melons;10.0;43
-Cats;143.0;2
+Mellon;10.0;43
+Carrot;143.0;2
 Blow up dolls;13.0;10
 Jasper;12.0;10

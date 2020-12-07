@@ -6,22 +6,41 @@ import java.util.Scanner;
 
 public class main {
     public static List<Item> storeStock = new ArrayList();
-    public static List scannedItems = new ArrayList();
+    public static List<Item> scannedItems = new ArrayList();
     public static String dataFile = "stock.txt";
 
 
     //public static Item[] item;
 
 
-    public static void scanItem(String itemID){
+    public static boolean scanItem(String itemID){
+        for (Item item : storeStock)
+        {
+            if (item.id.equals(itemID)){
+                System.out.println("Match found");
+                scannedItems.add(item);
+                System.out.println(scannedItems);
+                return true;
 
+                // If the item.stock is 0, then something should be done about that
+            }
+        }
+
+        return false;
     }
     public static void main(String[] args){
 
-
-
-
         loadFile(dataFile);
+
+
+//        //This code will pobably be usefull
+//        String scanTestItem = "Tree";
+//        if (scanItem(scanTestItem) == true){
+//            System.out.println("Mellon has been succesfully scanned");
+//        }else {
+//            System.out.println("The scan failed. \"" + scanTestItem+ "\" is not a product");
+//        }
+
 
         saveFile(dataFile);
 
@@ -53,7 +72,7 @@ public class main {
                     Integer stock = Integer.valueOf(arrOfStr[2]);
                     Item tempItem = new Item(arrOfStr[0], price, stock);
 
-                    System.out.println("TempItem.id: "+ tempItem.id);
+                    //System.out.println("TempItem.id: "+ tempItem.id);
 
                     storeStock.add(tempItem);
                     //System.out.println(storeStock.get(1));
@@ -79,11 +98,8 @@ public class main {
             for (Item var : storeStock)
             {
                 outString = var.id + ";" + var.price + ";" + var.stock + "\n";
-                System.out.println(outString);
+                //System.out.println(outString);
                 writer.append(outString);
-
-
-
             }
             writer.close();
         } catch (IOException e) {
