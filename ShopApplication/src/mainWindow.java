@@ -1,24 +1,47 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class main {
+public class mainWindow {
+    private JTextField scanInput;
+    private JPanel panel1;
+    private JButton scanButtonButton;
+    private JButton orderButton;
+    private JButton adminButton;
+    private JTextArea mainOutput;
+
+
     public static List<Item> storeStock = new ArrayList();
-    public static List<String> scannedItems = new ArrayList();
     public static String dataFile = "stock.txt";
-    public static String Receipt ="";
+    public static List<String> scannedItems = new ArrayList();
 
 
-    //public static Item[] item;
+
+    public mainWindow() {
+        scanButtonButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //JOptionPane.showMessageDialog(null, scanInput.getText());
+                scanItem(scanInput.getText());
+
+            }
+        });
+        orderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                order(scannedItems);
+            }
+        });
+    }
 
     public static void order(List<String> itemsToOrder){
 
-        receipt theReceipt = new receipt();
-        theReceipt.startReceipt();
+        String outMessage = "";
+
 
         for(String ordered : itemsToOrder){
             for (Item stockItem : storeStock){
@@ -26,12 +49,10 @@ public class main {
                     if (stockItem.stock > 0){
                         //System.out.println("The old stock: " + stockItem.stock);
                         stockItem.stock -= 1;
+                        outMessage += stockItem.id + "\n";
                         //System.out.println("The new stock: " + stockItem.stock);
-
-                        theReceipt.addItem(stockItem);
-
                     }else{
-                        //System.out.println(stockItem.id + " is out of stock");
+                        JOptionPane.showMessageDialog(null,"Error: No more items in stock");
                     }
 
 
@@ -40,54 +61,48 @@ public class main {
 
         }
 
+        JOptionPane.showMessageDialog(null,outMessage);
+
         saveFile(dataFile);
-        theReceipt.endReceipt();
-        System.out.println(theReceipt.receiptString);
+
     }
 
 
-    public static boolean scanItem(String itemID){
+    public static void scanItem(String itemID){
         for (Item item : storeStock) {
             if (item.id.equals(itemID)){
+                System.out.println("Item scanned");
 
                 //Checks to see if the item has allready been scanned
+
+
                 scannedItems.add(itemID);
+                return;
 
                 // If the item.stock is 0, then something should be done about that
             }
         }
 
-        return false;
+        JOptionPane.showMessageDialog(null,"could not find item in stock");
+
     }
 
-
-
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
         loadFile(dataFile);
 
-
-//        //This code will pobably be usefull
-//        String scanTestItem = "Tree";
-//        if (scanItem(scanTestItem) == true){
-//            System.out.println("Mellon has been succesfully scanned");
-//        }else {
-//            System.out.println("The scan failed. \"" + scanTestItem+ "\" is not a product");
-//        }
-
-        scanItem("Mellon");
-
-        order(scannedItems);
-        //System.out.println(genReceipt());
-
-        saveFile(dataFile);
-
-
-
+        JFrame frame = new JFrame("mainWindow");
+        frame.setContentPane(new mainWindow().panel1);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setSize(500, 400);
+        frame.setVisible(true);
 
     }
 
-    //This functions reads the file and returns the contents
+
+
+    //File stuff
+
     public static void loadFile(String file){
         System.out.println("Loading file:");
 
@@ -127,6 +142,7 @@ public class main {
         System.out.println("File loading complete");
     }
 
+
     public static void saveFile(String file){
         String outString;
         BufferedWriter writer = null;
@@ -144,6 +160,7 @@ public class main {
             e.printStackTrace();
         }
     }
+
 
 
 }
