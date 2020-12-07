@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,12 +16,24 @@ public class main {
 
 
     public static boolean scanItem(String itemID){
-        for (Item item : storeStock)
-        {
+        for (Item item : storeStock) {
             if (item.id.equals(itemID)){
-                System.out.println("Match found");
+
+                //Checks to see if the item has allready been scanned
+
+                for (Item scannedItem : scannedItems){
+                    //System.out.println(scannedItem.id + " : " + itemID);
+                    if (scannedItem.id.equals(itemID)){
+                        scannedItem.numInOrder += 1;
+                        //System.out.println("repeat match found: " + scannedItem.numInOrder);
+                        return true;
+                    }
+                }
+
+                //System.out.println("Match found");
+                item.numInOrder +=1;
+                //System.out.println(item.numInOrder);
                 scannedItems.add(item);
-                System.out.println(scannedItems);
                 return true;
 
                 // If the item.stock is 0, then something should be done about that
@@ -28,6 +42,30 @@ public class main {
 
         return false;
     }
+
+    public static String genReceipt(){
+        String receiptString = "";
+        Float orderTotal = 0f;
+
+        //gets a time to add to the receipt
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+
+        receiptString += (dtf.format(now) +"\n");
+        receiptString += "====================\n";
+
+        for (Item item : scannedItems){
+            receiptString += item.numInOrder + " * " + item.id + " | £" + item.price + "\n"; // It does seem like receipts don't compile multiple items into one price
+            orderTotal += item.price * item.numInOrder;
+        }
+        receiptString += "====================\n";
+        receiptString += "Total: £" + orderTotal;
+
+        return receiptString;
+    }
+
+
+
     public static void main(String[] args){
 
         loadFile(dataFile);
@@ -41,6 +79,16 @@ public class main {
 //            System.out.println("The scan failed. \"" + scanTestItem+ "\" is not a product");
 //        }
 
+        scanItem("Mellon");
+        scanItem("Mellon");
+        scanItem("Mellon");
+        scanItem("tree");
+        scanItem("Jasper");
+        scanItem("Jasper");
+        scanItem("Carrot");
+
+
+        System.out.println(genReceipt());
 
         saveFile(dataFile);
 

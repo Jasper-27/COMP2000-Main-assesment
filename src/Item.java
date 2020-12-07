@@ -1,8 +1,9 @@
-public class Item {
+public class Item{
 
     String id;
     Float price;
     Integer stock;
+    Integer numInOrder = 0;
 
     //Constructor
     public Item(String in_id, Float in_price, Integer in_stock){
