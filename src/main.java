@@ -8,11 +8,42 @@ import java.util.Scanner;
 
 public class main {
     public static List<Item> storeStock = new ArrayList();
-    public static List<Item> scannedItems = new ArrayList();
+    public static List<String> scannedItems = new ArrayList();
     public static String dataFile = "stock.txt";
+    public static String Receipt ="";
 
 
     //public static Item[] item;
+
+    public static void order(List<String> itemsToOrder){
+
+        receipt theReceipt = new receipt();
+        theReceipt.startReceipt();
+
+        for(String ordered : itemsToOrder){
+            for (Item stockItem : storeStock){
+                if (ordered.equalsIgnoreCase(stockItem.id)){
+                    if (stockItem.stock > 0){
+                        //System.out.println("The old stock: " + stockItem.stock);
+                        stockItem.stock -= 1;
+                        //System.out.println("The new stock: " + stockItem.stock);
+
+                        theReceipt.addItem(stockItem);
+
+                    }else{
+                        //System.out.println(stockItem.id + " is out of stock");
+                    }
+
+
+                }
+            }
+
+        }
+
+        saveFile(dataFile);
+        theReceipt.endReceipt();
+        System.out.println(theReceipt.receiptString);
+    }
 
 
     public static boolean scanItem(String itemID){
@@ -20,48 +51,13 @@ public class main {
             if (item.id.equals(itemID)){
 
                 //Checks to see if the item has allready been scanned
-
-                for (Item scannedItem : scannedItems){
-                    //System.out.println(scannedItem.id + " : " + itemID);
-                    if (scannedItem.id.equals(itemID)){
-                        scannedItem.numInOrder += 1;
-                        //System.out.println("repeat match found: " + scannedItem.numInOrder);
-                        return true;
-                    }
-                }
-
-                //System.out.println("Match found");
-                item.numInOrder +=1;
-                //System.out.println(item.numInOrder);
-                scannedItems.add(item);
-                return true;
+                scannedItems.add(itemID);
 
                 // If the item.stock is 0, then something should be done about that
             }
         }
 
         return false;
-    }
-
-    public static String genReceipt(){
-        String receiptString = "";
-        Float orderTotal = 0f;
-
-        //gets a time to add to the receipt
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        LocalDateTime now = LocalDateTime.now();
-
-        receiptString += (dtf.format(now) +"\n");
-        receiptString += "====================\n";
-
-        for (Item item : scannedItems){
-            receiptString += item.numInOrder + " * " + item.id + " | £" + item.price + "\n"; // It does seem like receipts don't compile multiple items into one price
-            orderTotal += item.price * item.numInOrder;
-        }
-        receiptString += "====================\n";
-        receiptString += "Total: £" + orderTotal;
-
-        return receiptString;
     }
 
 
@@ -80,15 +76,9 @@ public class main {
 //        }
 
         scanItem("Mellon");
-        scanItem("Mellon");
-        scanItem("Mellon");
-        scanItem("tree");
-        scanItem("Jasper");
-        scanItem("Jasper");
-        scanItem("Carrot");
 
-
-        System.out.println(genReceipt());
+        order(scannedItems);
+        //System.out.println(genReceipt());
 
         saveFile(dataFile);
 
