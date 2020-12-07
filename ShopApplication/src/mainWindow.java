@@ -68,7 +68,7 @@ public class mainWindow {
     }
 
 
-    public static void scanItem(String itemID){
+    public void scanItem(String itemID){
         for (Item item : storeStock) {
             if (item.id.equals(itemID)){
                 System.out.println("Item scanned");
@@ -77,6 +77,7 @@ public class mainWindow {
 
 
                 scannedItems.add(itemID);
+                mainOutput.append(itemID + "\n");
                 return;
 
                 // If the item.stock is 0, then something should be done about that
