@@ -13,12 +13,13 @@ public class mainWindow {
     private JButton orderButton;
     private JButton adminButton;
     private JTextArea mainOutput;
+    private JLabel lb_currentPrice;
+    private float currentPrice;
 
 
     public static List<Item> storeStock = new ArrayList();
     public static String dataFile = "stock.txt";
     public static List<String> scannedItems = new ArrayList();
-
     public static JFrame frame = new JFrame("mainWindow");
 
 
@@ -50,6 +51,8 @@ public class mainWindow {
             @Override
             public void actionPerformed(ActionEvent e) { }
         });
+
+
     }
 
     public static void order(List<String> itemsToOrder){
@@ -82,16 +85,20 @@ public class mainWindow {
     }
 
 
+    //Lets add a check stock feature here. Remember we don't have to save the array till it is done
     public void scanItem(String itemID){
         for (Item item : storeStock) {
             if (item.id.equals(itemID)){
                 System.out.println("Item scanned");
 
-                //Checks to see if the item has allready been scanned
+                currentPrice += item.price;
 
+                //Checks to see if the item has allready been scanned
 
                 scannedItems.add(itemID);
                 mainOutput.append(itemID + "\n");
+
+                lb_currentPrice.setText("Total price: £" + String.valueOf(currentPrice));
                 return;
 
                 // If the item.stock is 0, then something should be done about that
@@ -137,8 +144,6 @@ public class mainWindow {
                 String data = myReader.nextLine();
 
                 String[] arrOfStr = data.split(";", 3);
-
-
 
                 try{
                     Float price = Float.valueOf(arrOfStr[1]);
