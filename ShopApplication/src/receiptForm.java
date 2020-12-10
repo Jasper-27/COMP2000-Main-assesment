@@ -4,6 +4,7 @@ public class receiptForm {
     private JTextArea receiptOutput;
     public JPanel pnl_receipt;
 
+    private String receiptText = "";
 
     public static void main(String[] args) {
 
@@ -16,6 +17,11 @@ public class receiptForm {
         frame.setVisible(true);
 
 
+
+    }
+
+
+    public void genReceipt(){
 
     }
 }
