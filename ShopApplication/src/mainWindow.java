@@ -14,7 +14,7 @@ public class mainWindow {
     private JButton adminButton;
     private JTextArea mainOutput;
     private JLabel lb_currentPrice;
-    private float currentPrice;
+    public static float currentPrice;
 
 
     public static List<Item> storeStock = new ArrayList();
