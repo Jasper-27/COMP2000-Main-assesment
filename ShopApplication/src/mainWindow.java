@@ -39,12 +39,31 @@ public class mainWindow {
                 order(scannedItems);
 
                 //Changes to the payment window 
-                frame.setContentPane(new paymentForm().pnl_payment);
-                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                frame.pack();
-                //frame.setSize(500, 400);
-                frame.setResizable(false);
-                frame.setVisible(true);
+//                frame.setContentPane(new paymentForm().pnl_payment);
+//                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//                frame.pack();
+//                //frame.setSize(500, 400);
+//                frame.setResizable(false);
+//                frame.setVisible(true);
+
+
+
+//                JFrame fr_pay = new JFrame("Payment Window");
+//                fr_pay.setContentPane(new paymentForm().pnl_payment);
+//                fr_pay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//                fr_pay.pack();
+//                //frame.setSize(500, 400);
+//                fr_pay.setResizable(false);
+//                fr_pay.setVisible(true);
+
+
+                paymentForm.main(null);
+
+
+
+
+
+
             }
         });
         adminButton.addActionListener(new ActionListener() {

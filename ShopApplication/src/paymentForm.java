@@ -18,18 +18,24 @@ public class paymentForm {
         });
 
         lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
+        btn_cardPay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardPay();
+            }
+        });
     }
 
     public static void main(String[] args) {
 
 
-        JFrame frame = new JFrame("receiptWindow");
-        frame.setContentPane(new paymentForm().pnl_payment);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
+        JFrame fr_receipt = new JFrame("Payment Window");
+        fr_receipt.setContentPane(new paymentForm().pnl_payment);
+        fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        fr_receipt.pack();
         //frame.setSize(500, 400);
-        frame.setResizable(false);
-        frame.setVisible(true);
+        fr_receipt.setResizable(false);
+        fr_receipt.setVisible(true);
 
 
 
@@ -37,7 +43,28 @@ public class paymentForm {
     }
 
 
-    public static void cardPay(){
+    public  void cardPay(){
+
+        if (mainWindow.currentPrice < 0){
+            JOptionPane.showMessageDialog(null,"Nothing for you to pay");
+        }else {
+
+            //Yes/no dialogue box
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Confirm payment of: £" + mainWindow.currentPrice, "Card payment", dialogButton);
+            if(dialogResult == 0) {
+                System.out.println("Yes");
+                mainWindow.currentPrice = 0;
+                lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
+
+                //This is where the code to take the money out of their account would go
+
+                goToReceipt();
+
+            } else {
+                System.out.println("No");
+            }
+        }
 
 
     }
@@ -54,7 +81,7 @@ public class paymentForm {
         if (change > 0){
             JOptionPane.showMessageDialog(null,"Here is your change: £" + change);
         }
-        
+
 
         lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
         tf_cashAmount.setText("");
@@ -66,5 +93,17 @@ public class paymentForm {
 
         return change;
 
+    }
+
+    public void goToReceipt(){
+
+
+        JFrame fr_pay = new JFrame("receiptWindow");
+        fr_pay.setContentPane(new receiptForm().pnl_receipt);
+        fr_pay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        fr_pay.pack();
+        fr_pay.setSize(500, 400);
+        fr_pay.setResizable(false);
+        fr_pay.setVisible(true);
     }
 }
