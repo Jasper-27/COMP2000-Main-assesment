@@ -22,28 +22,42 @@ public class paymentForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardPay();
+
+                //receiptForm.main(null);
+
+
+
+                JFrame fr_receipt = new JFrame("Receipt Window");
+                fr_receipt.setContentPane(new receiptForm().pnl_receipt);
+                fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                fr_receipt.pack();
+                fr_receipt.setSize(500, 400);
+                fr_receipt.setResizable(false);
+                fr_receipt.setVisible(true);
+
+                receiptForm.main(null);
+
+
+
             }
         });
     }
 
     public static void main(String[] args) {
-
-
-        JFrame fr_receipt = new JFrame("Payment Window");
-        fr_receipt.setContentPane(new paymentForm().pnl_payment);
-        fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        fr_receipt.pack();
+        JFrame fr_payment = new JFrame("Payment Window");
+        fr_payment.setContentPane(new paymentForm().pnl_payment);
+        fr_payment.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        fr_payment.pack();
         //frame.setSize(500, 400);
-        fr_receipt.setResizable(false);
-        fr_receipt.setVisible(true);
-
+        fr_payment.setResizable(false);
+        fr_payment.setVisible(true);
 
 
 
     }
 
 
-    public  void cardPay(){
+    public void cardPay(){
 
         if (mainWindow.currentPrice < 0){
             JOptionPane.showMessageDialog(null,"Nothing for you to pay");
@@ -59,7 +73,6 @@ public class paymentForm {
 
                 //This is where the code to take the money out of their account would go
 
-                goToReceipt();
 
             } else {
                 System.out.println("No");
@@ -95,15 +108,4 @@ public class paymentForm {
 
     }
 
-    public void goToReceipt(){
-
-
-        JFrame fr_pay = new JFrame("receiptWindow");
-        fr_pay.setContentPane(new receiptForm().pnl_receipt);
-        fr_pay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        fr_pay.pack();
-        fr_pay.setSize(500, 400);
-        fr_pay.setResizable(false);
-        fr_pay.setVisible(true);
-    }
 }
