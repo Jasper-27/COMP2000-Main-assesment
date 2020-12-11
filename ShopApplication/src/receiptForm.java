@@ -19,11 +19,15 @@ public class receiptForm {
             }
         });
 
+
+
     }
 
-    public static void main(String[] args) {
+    public  void main(String[] args) {
 
         JFrame fr_receipt = new JFrame("Receipt Window");
+
+
         fr_receipt.setContentPane(new receiptForm().pnl_receipt);
         fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         fr_receipt.pack();

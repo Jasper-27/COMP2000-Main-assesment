@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class paymentForm {
     private JButton btn_cardPay;
@@ -59,7 +61,13 @@ public class paymentForm {
                 mainWindow.currentPrice = 0;
                 lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
                 paymentMethod = "card";
-                receiptForm.main(null);
+                //receiptForm.main(null);
+
+                getReceipt();
+
+
+
+
 
                 //This is where the code to take the money out of their account would go
 
@@ -97,14 +105,8 @@ public class paymentForm {
         if (change > 0){
             JOptionPane.showMessageDialog(null,"Here is your change: £" + change);
 
+            getReceipt();
 
-            JFrame fr_receipt = new JFrame("Receipt Window");
-            fr_receipt.setContentPane(new receiptForm().pnl_receipt);
-            fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            fr_receipt.pack();
-            fr_receipt.setSize(500, 400);
-            fr_receipt.setResizable(false);
-            fr_receipt.setVisible(true);
 
 
         }
@@ -119,6 +121,26 @@ public class paymentForm {
         }
 
         paymentMethod = "cash";
+        getReceipt();
     }
 
+
+
+    public void getReceipt(){
+
+        mainWindow.frame = new JFrame("Receipt Window");
+        mainWindow.frame.setContentPane( new receiptForm().pnl_receipt);
+        mainWindow.frame.setVisible(true);
+        mainWindow.frame.setSize(500,400);
+//
+//        JFrame fr_receipt = new JFrame("Receipt Window");
+//        fr_receipt.setContentPane(new receiptForm().pnl_receipt);
+//        fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        fr_receipt.pack();
+//        fr_receipt.setSize(500, 400);
+//        fr_receipt.setResizable(false);
+//        fr_receipt.setVisible(true);
+
+
+    }
 }
