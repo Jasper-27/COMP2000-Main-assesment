@@ -18,7 +18,7 @@ public class mainWindow {
 
 
     public static List<Item> storeStock = new ArrayList();
-    public static String dataFile = "stock.txt";
+    public static String dataFile = "Resources/stock.txt";
     public static List<String> scannedItems = new ArrayList();
     public static JFrame frame = new JFrame("mainWindow");
 
@@ -57,11 +57,10 @@ public class mainWindow {
 //                fr_pay.setVisible(true);
 
 
-                paymentForm.main(null);
+                //paymentForm.main(null);
 
-
-
-
+                frame.setContentPane(new paymentForm().pnl_payment);
+                frame.pack();
 
 
             }
