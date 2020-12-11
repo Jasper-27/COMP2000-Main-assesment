@@ -27,23 +27,6 @@ public class paymentForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardPay();
-
-                //receiptForm.main(null);
-
-
-//
-//                JFrame fr_receipt = new JFrame("Receipt Window");
-//                fr_receipt.setContentPane(new receiptForm().pnl_receipt);
-//                fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//                fr_receipt.pack();
-//                fr_receipt.setSize(500, 400);
-//                fr_receipt.setResizable(false);
-//                fr_receipt.setVisible(true);
-
-
-
-
-
             }
         });
     }
@@ -92,10 +75,22 @@ public class paymentForm {
 
     public void cashPay(String cashText){
 
-        change = Float.parseFloat(cashText) - mainWindow.currentPrice;
+        float currentCash = 0f;
+
+        try{
+            currentCash = Float.parseFloat(cashText);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Invalid cash input");
+            tf_cashAmount.setText("");
+            return;
+        }
+
+
+
+        change = currentCash - mainWindow.currentPrice;
         mainWindow.currentPrice = -change;
 
-        System.out.println("Cash: " + Float.parseFloat(cashText) + " CurrentPrice: " + mainWindow.currentPrice + " change: " + change);
+        System.out.println("Cash: " + currentCash + " CurrentPrice: " + mainWindow.currentPrice + " change: " + change);
 
 
 
