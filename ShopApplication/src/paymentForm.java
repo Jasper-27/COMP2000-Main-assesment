@@ -104,11 +104,6 @@ public class paymentForm {
 
         if (change > 0){
             JOptionPane.showMessageDialog(null,"Here is your change: £" + change);
-
-            getReceipt();
-
-
-
         }
 
 
@@ -118,10 +113,11 @@ public class paymentForm {
 
         if (mainWindow.currentPrice <= 0){
             lb_currentPrice.setText("");
+            getReceipt();
         }
 
         paymentMethod = "cash";
-        getReceipt();
+        //getReceipt();
     }
 
 
