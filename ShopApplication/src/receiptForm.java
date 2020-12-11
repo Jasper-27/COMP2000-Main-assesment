@@ -1,27 +1,35 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class receiptForm {
     private JTextArea receiptOutput;
     public JPanel pnl_receipt;
-    private JButton btnGenRecipt;
+    private JButton btnGenReceipt;
 
     //private static String receiptText = "";
 
     public receiptForm() {
-        btnGenRecipt.addActionListener(new ActionListener() {
+        btnGenReceipt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 genReceipt();
             }
         });
+
     }
 
     public static void main(String[] args) {
+
+        JFrame fr_receipt = new JFrame("Receipt Window");
+        fr_receipt.setContentPane(new receiptForm().pnl_receipt);
+        fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        fr_receipt.pack();
+        fr_receipt.setSize(500, 400);
+        fr_receipt.setResizable(false);
+        fr_receipt.setVisible(true);
 
 
     }
@@ -36,6 +44,7 @@ public class receiptForm {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
         receiptString += (dtf.format(now) +"\n");
+        receiptString += "Payment method: " + paymentForm.paymentMethod + "\n";
         receiptString += "====================\n";
 
 
@@ -51,7 +60,12 @@ public class receiptForm {
         }
 
         receiptString += "====================\n";
-        receiptString += "Total : £" + orderTotal;
+        receiptString += "Total : £" + orderTotal + "\n";
+
+        if (paymentForm.paymentMethod == "cash"){
+
+            receiptString += "Change: £" + paymentForm.change;
+        }
 
         //JOptionPane.showMessageDialog(null,receiptString);
 

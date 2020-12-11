@@ -9,11 +9,16 @@ public class paymentForm {
     public JPanel pnl_payment;
     private JLabel lb_currentPrice;
 
+    public static String paymentMethod;
+    public static Float change = 0f;
+
     public paymentForm() {
         btn_cashPay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(cashPay(tf_cashAmount.getText()));
+                cashPay(tf_cashAmount.getText());
+
+
             }
         });
 
@@ -26,16 +31,16 @@ public class paymentForm {
                 //receiptForm.main(null);
 
 
+//
+//                JFrame fr_receipt = new JFrame("Receipt Window");
+//                fr_receipt.setContentPane(new receiptForm().pnl_receipt);
+//                fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//                fr_receipt.pack();
+//                fr_receipt.setSize(500, 400);
+//                fr_receipt.setResizable(false);
+//                fr_receipt.setVisible(true);
 
-                JFrame fr_receipt = new JFrame("Receipt Window");
-                fr_receipt.setContentPane(new receiptForm().pnl_receipt);
-                fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                fr_receipt.pack();
-                fr_receipt.setSize(500, 400);
-                fr_receipt.setResizable(false);
-                fr_receipt.setVisible(true);
 
-                receiptForm.main(null);
 
 
 
@@ -70,6 +75,8 @@ public class paymentForm {
                 System.out.println("Yes");
                 mainWindow.currentPrice = 0;
                 lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
+                paymentMethod = "card";
+                receiptForm.main(null);
 
                 //This is where the code to take the money out of their account would go
 
@@ -80,11 +87,12 @@ public class paymentForm {
         }
 
 
+
     }
 
-    public float cashPay(String cashText){
+    public void cashPay(String cashText){
 
-        float change = Float.parseFloat(cashText) - mainWindow.currentPrice;
+        change = Float.parseFloat(cashText) - mainWindow.currentPrice;
         mainWindow.currentPrice = -change;
 
         System.out.println("Cash: " + Float.parseFloat(cashText) + " CurrentPrice: " + mainWindow.currentPrice + " change: " + change);
@@ -93,6 +101,17 @@ public class paymentForm {
 
         if (change > 0){
             JOptionPane.showMessageDialog(null,"Here is your change: £" + change);
+
+
+            JFrame fr_receipt = new JFrame("Receipt Window");
+            fr_receipt.setContentPane(new receiptForm().pnl_receipt);
+            fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            fr_receipt.pack();
+            fr_receipt.setSize(500, 400);
+            fr_receipt.setResizable(false);
+            fr_receipt.setVisible(true);
+
+
         }
 
 
@@ -104,8 +123,7 @@ public class paymentForm {
             lb_currentPrice.setText("");
         }
 
-        return change;
-
+        paymentMethod = "cash";
     }
 
 }
