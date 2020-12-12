@@ -66,11 +66,12 @@ public class receiptForm {
         receiptString += "====================\n";
         receiptString += "Total : £" + orderTotal + "\n";
 
-        if (paymentForm.paymentMethod == "cash"){
 
-            receiptString += "Change: £" + paymentForm.change;
+        if (paymentForm.paymentMethod == "cash"){
+            receiptString += "Change: £ " + paymentForm.change;
         }
 
+        System.out.println(paymentForm.change);
         //JOptionPane.showMessageDialog(null,receiptString);
 
         receiptOutput.setText(receiptString);
