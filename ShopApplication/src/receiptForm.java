@@ -19,8 +19,6 @@ public class receiptForm {
             }
         });
 
-
-
     }
 
     public  void main(String[] args) {

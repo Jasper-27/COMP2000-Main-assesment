@@ -77,6 +77,7 @@ public class paymentForm {
             }
         }
 
+        mainWindow.saveFile();
 
 
     }
@@ -117,6 +118,7 @@ public class paymentForm {
         }
 
         paymentMethod = "cash";
+        mainWindow.saveFile();
         //getReceipt();
     }
 

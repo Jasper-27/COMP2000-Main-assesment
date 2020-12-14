@@ -96,9 +96,9 @@ public class mainWindow {
 
         }
 
-        JOptionPane.showMessageDialog(null,outMessage);
+        //JOptionPane.showMessageDialog(null,outMessage);
 
-        saveFile(dataFile);
+
 
     }
 
@@ -186,11 +186,11 @@ public class mainWindow {
     }
 
 
-    public static void saveFile(String file){
+    public static void saveFile(){
         String outString;
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(file));
+            writer = new BufferedWriter(new FileWriter(dataFile));
 
             for (Item var : storeStock)
             {
