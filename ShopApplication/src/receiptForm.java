@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,12 +6,13 @@ import java.time.format.DateTimeFormatter;
 public class receiptForm {
     private JTextArea receiptOutput;
     public JPanel pnl_receipt;
-    private JButton btnGenReceipt;
+    private JButton btn_genReceipt;
+    private JButton btn_finish;
 
     //private static String receiptText = "";
 
     public receiptForm() {
-        btnGenReceipt.addActionListener(new ActionListener() {
+        btn_genReceipt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 genReceipt();
@@ -73,6 +73,8 @@ public class receiptForm {
         //JOptionPane.showMessageDialog(null,receiptString);
 
         receiptOutput.setText(receiptString);
+
+        btn_genReceipt.setEnabled(false);
 
 
 

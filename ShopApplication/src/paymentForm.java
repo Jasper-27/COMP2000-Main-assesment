@@ -43,7 +43,6 @@ public class paymentForm {
         fr_payment.setVisible(true);
 
 
-
     }
 
 
@@ -64,9 +63,6 @@ public class paymentForm {
                 //receiptForm.main(null);
 
                 getReceipt();
-
-
-
 
 
                 //This is where the code to take the money out of their account would go
