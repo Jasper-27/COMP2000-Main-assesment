@@ -121,13 +121,19 @@ public class paymentForm {
 
 
     public void getReceipt(){
+        //receiptForm theReceipt = new receiptForm();
 
-        mainWindow.frame = new JFrame("Receipt Window");
-        //mainWindow.frame.setContentPane( new receiptForm().pnl_receipt);
-        receiptForm theReceipt = new receiptForm();
-        mainWindow.frame.setContentPane(theReceipt.pnl_receipt);
-        mainWindow.frame.setVisible(true);
-        mainWindow.frame.setSize(500,400);
+//        mainWindow.frame = new JFrame("Receipt Window");
+//        //mainWindow.frame.setContentPane( new receiptForm().pnl_receipt);
+//
+//        mainWindow.frame.setContentPane(theReceipt.pnl_receipt);
+//        mainWindow.frame.setVisible(true);
+//        mainWindow.frame.setSize(500,400);
+
+
+        mainWindow.frame.setContentPane(new receiptForm().pnl_receipt);
+        mainWindow.frame.setTitle("Receipt");
+        mainWindow.frame.pack();
 //
 
 

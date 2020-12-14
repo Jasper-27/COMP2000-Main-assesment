@@ -7,15 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class mainWindow {
-    private JTextField scanInput;
+    private JTextField txt_scan;
     private JPanel panel1;
-    private JButton scanButtonButton;
-    private JButton orderButton;
-    private JButton adminButton;
-    private JTextArea mainOutput;
+    private JButton btn_scan;
+    private JButton btn_order;
+    private JButton btn_admin;
+    private JTextArea txt_mainOutput;
     private JLabel lb_currentPrice;
     public static float currentPrice;
 
+    public String company = "Company";
 
     public static List<Item> storeStock = new ArrayList();
     public static String dataFile = "Resources/stock.txt";
@@ -25,47 +26,27 @@ public class mainWindow {
 
 
     public mainWindow() {
-        scanButtonButton.addActionListener(new ActionListener() {
+        btn_scan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(null, scanInput.getText());
-                scanItem(scanInput.getText());
+                //JOptionPane.showMessageDialog(null, txt_scan.getText());
+                scanItem(txt_scan.getText());
 
             }
         });
-        orderButton.addActionListener(new ActionListener() {
+        btn_order.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 order(scannedItems);
 
-                //Changes to the payment window 
-//                frame.setContentPane(new paymentForm().pnl_payment);
-//                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//                frame.pack();
-//                //frame.setSize(500, 400);
-//                frame.setResizable(false);
-//                frame.setVisible(true);
-
-
-
-//                JFrame fr_pay = new JFrame("Payment Window");
-//                fr_pay.setContentPane(new paymentForm().pnl_payment);
-//                fr_pay.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//                fr_pay.pack();
-//                //frame.setSize(500, 400);
-//                fr_pay.setResizable(false);
-//                fr_pay.setVisible(true);
-
-
-                //paymentForm.main(null);
-
-                frame.setContentPane(new paymentForm().pnl_payment);
-                frame.pack();
+                 frame.setContentPane(new paymentForm().pnl_payment);
+                 frame.setTitle("Payment");
+                 frame.pack();
 
 
             }
         });
-        adminButton.addActionListener(new ActionListener() {
+        btn_admin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { }
         });
@@ -73,33 +54,19 @@ public class mainWindow {
 
     }
 
+    //Remove the items from the stock
     public static void order(List<String> itemsToOrder){
-
-        String outMessage = "";
-
-
         for(String ordered : itemsToOrder){
             for (Item stockItem : storeStock){
                 if (ordered.equalsIgnoreCase(stockItem.id)){
                     if (stockItem.stock > 0){
-                        //System.out.println("The old stock: " + stockItem.stock);
                         stockItem.stock -= 1;
-                        outMessage += stockItem.id + "\n";
-                        //System.out.println("The new stock: " + stockItem.stock);
                     }else{
                         JOptionPane.showMessageDialog(null,"Error: No more items in stock");
                     }
-
-
                 }
             }
-
         }
-
-        //JOptionPane.showMessageDialog(null,outMessage);
-
-
-
     }
 
 
@@ -114,7 +81,7 @@ public class mainWindow {
                 //Checks to see if the item has allready been scanned
 
                 scannedItems.add(itemID);
-                mainOutput.append(itemID + "\n");
+                txt_mainOutput.append(itemID + "\n");
 
                 lb_currentPrice.setText("Total price: £" + String.valueOf(currentPrice));
                 return;
@@ -136,11 +103,6 @@ public class mainWindow {
         frame.pack();
         frame.setSize(500, 400);
         frame.setVisible(true);
-
-
-        //JFrame pay_frame = new JFrame("receiptWindow");
-
-
 
     }
 
