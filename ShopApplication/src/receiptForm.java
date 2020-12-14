@@ -3,11 +3,18 @@ import java.awt.event.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class receiptForm {
-    private JTextArea receiptOutput;
+public class receiptForm{
+    public JTextArea receiptOutput;
     public JPanel pnl_receipt;
     private JButton btn_genReceipt;
     private JButton btn_finish;
+
+    public static String receiptString = "";
+
+    static public receipt receipt = new receipt();
+    static public Thread receiptThread = new Thread(receipt);
+
+
 
     //private static String receiptText = "";
 
@@ -16,67 +23,24 @@ public class receiptForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 genReceipt();
+                btn_genReceipt.setEnabled(false);
             }
         });
 
     }
 
-    public  void main(String[] args) {
-
-        JFrame fr_receipt = new JFrame("Receipt Window");
-
-
-        fr_receipt.setContentPane(new receiptForm().pnl_receipt);
-        fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        fr_receipt.pack();
-        fr_receipt.setSize(500, 400);
-        fr_receipt.setResizable(false);
-        fr_receipt.setVisible(true);
-
-
-    }
-
 
     public void genReceipt(){
-
-        String receiptString = "";
-        Float orderTotal = 0f;
-
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-
-        receiptString += (dtf.format(now) +"\n");
-        receiptString += "Payment method: " + paymentForm.paymentMethod + "\n";
-        receiptString += "====================\n";
+        receiptThread.start();
 
 
-
-        for(String ordered : mainWindow.scannedItems){
-            for (Item item : mainWindow.storeStock){
-                if (ordered.equalsIgnoreCase(item.id)){
-                    receiptString += item.id + " | £" + item.price + "\n";
-                    orderTotal += item.price;
-
-                }
-            }
+        //When that receipt has finished, populat the text box
+        try{receiptForm.receiptThread.join();}
+        catch(Exception e){;}
+        finally{
+            //sending the text to the text box
+            receiptOutput.setText(receiptString);
         }
-
-        receiptString += "====================\n";
-        receiptString += "Total : £" + orderTotal + "\n";
-
-
-        if (paymentForm.paymentMethod == "cash"){
-            receiptString += "Change: £ " + paymentForm.change;
-        }
-
-        System.out.println(paymentForm.change);
-        //JOptionPane.showMessageDialog(null,receiptString);
-
-        receiptOutput.setText(receiptString);
-
-        btn_genReceipt.setEnabled(false);
-
-
-
     }
+
 }
