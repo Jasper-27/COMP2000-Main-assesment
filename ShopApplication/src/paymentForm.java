@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class paymentForm {
     private JButton btn_cardPay;
@@ -24,7 +22,7 @@ public class paymentForm {
             }
         });
 
-        lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
+        lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
         btn_cardPay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,17 +46,17 @@ public class paymentForm {
 
     public void cardPay(){
 
-        if (mainWindow.currentPrice < 0){
+        if (mainForm.currentPrice < 0){
             JOptionPane.showMessageDialog(null,"Nothing for you to pay");
         }else {
 
             //Yes/no dialogue box
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Confirm payment of: £" + mainWindow.currentPrice, "Card payment", dialogButton);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Confirm payment of: £" + mainForm.currentPrice, "Card payment", dialogButton);
             if(dialogResult == 0) {
                 System.out.println("Yes");
-                mainWindow.currentPrice = 0;
-                lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
+                mainForm.currentPrice = 0;
+                lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
                 paymentMethod = "card";
                 //receiptForm.main(null);
 
@@ -73,7 +71,7 @@ public class paymentForm {
             }
         }
 
-        mainWindow.saveFile();
+        mainForm.saveFile();
 
 
     }
@@ -92,10 +90,10 @@ public class paymentForm {
 
 
 
-        change = currentCash - mainWindow.currentPrice;
-        mainWindow.currentPrice = -change;
+        change = currentCash - mainForm.currentPrice;
+        mainForm.currentPrice = -change;
 
-        System.out.println("Cash: " + currentCash + " CurrentPrice: " + mainWindow.currentPrice + " change: " + change);
+        System.out.println("Cash: " + currentCash + " CurrentPrice: " + mainForm.currentPrice + " change: " + change);
 
 
 
@@ -104,17 +102,17 @@ public class paymentForm {
         }
 
 
-        lb_currentPrice.setText("Owed: £" + mainWindow.currentPrice);
+        lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
         tf_cashAmount.setText("");
 
 
-        if (mainWindow.currentPrice <= 0){
+        if (mainForm.currentPrice <= 0){
             lb_currentPrice.setText("");
             getReceipt();
         }
 
         paymentMethod = "cash";
-        mainWindow.saveFile();
+        mainForm.saveFile();
         //getReceipt();
     }
 
@@ -131,9 +129,9 @@ public class paymentForm {
 //        mainWindow.frame.setSize(500,400);
 
 
-        mainWindow.frame.setContentPane(new receiptForm().pnl_receipt);
-        mainWindow.frame.setTitle("Receipt");
-        mainWindow.frame.pack();
+        mainForm.frame.setContentPane(new receiptForm().pnl_receipt);
+        mainForm.frame.setTitle("Receipt");
+        mainForm.frame.pack();
 //
 
 

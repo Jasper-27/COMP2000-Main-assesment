@@ -20,8 +20,8 @@ public class receipt extends Thread{
 
 
 
-        for(String ordered : mainWindow.scannedItems){
-            for (Item item : mainWindow.storeStock){
+        for(String ordered : mainForm.scannedItems){
+            for (Item item : mainForm.storeStock){
                 if (ordered.equalsIgnoreCase(item.id)){
                     receiptString += item.id + " | £" + item.price + "\n";
                     orderTotal += item.price;

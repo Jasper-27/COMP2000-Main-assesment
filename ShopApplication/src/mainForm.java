@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class mainWindow {
+public class mainForm {
     private JTextField txt_scan;
     private JPanel panel1;
     private JButton btn_scan;
@@ -25,7 +25,7 @@ public class mainWindow {
 
 
 
-    public mainWindow() {
+    public mainForm() {
         btn_scan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,7 +98,7 @@ public class mainWindow {
         loadFile(dataFile);
 
 
-        frame.setContentPane(new mainWindow().panel1);
+        frame.setContentPane(new mainForm().panel1);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(500, 400);
