@@ -50,7 +50,7 @@ public class paymentForm {
                 System.out.println("No");
             }
         }
-        mainForm.saveFile();
+        mainForm.stock.saveFile();
     }
 
     public void cashPay(String cashText){
@@ -85,11 +85,9 @@ public class paymentForm {
         }
 
         paymentMethod = "cash";
-        mainForm.saveFile();
+        mainForm.stock.saveFile();
 
     }
-
-
 
     public void getReceipt(){
         mainForm.frame.setContentPane(new receiptForm().pnl_receipt);

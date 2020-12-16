@@ -21,7 +21,7 @@ public class adminForm {
         btn_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainForm.saveFile();
+                mainForm.stock.saveFile();
             }
         });
     }
@@ -31,7 +31,7 @@ public class adminForm {
     }
     public void fillStock(){
         String stock = "";
-        for(Item item : mainForm.storeStock){
+        for(Item item : mainForm.stock.storeStock){
             stock += item.id + "    |   " + item.stock + "\n";
         }
         textArea1.setText(stock);
@@ -45,7 +45,7 @@ public class adminForm {
 
             int pos = findItem(StockString);
 
-            mainForm.storeStock.get(pos).stock += numberToAdd;
+            mainForm.stock.storeStock.get(pos).stock += numberToAdd;
 
             fillStock();
 
@@ -60,9 +60,9 @@ public class adminForm {
 
     public int findItem(String in) {
 
-        for(Item item : mainForm.storeStock){
+        for(Item item : mainForm.stock.storeStock){
             if(item.id.equals(in)){
-                return mainForm.storeStock.indexOf(item);
+                return mainForm.stock.storeStock.indexOf(item);
             }
         }
         return -1; // Returning -1 shows that something went wrong, it should never actually happen

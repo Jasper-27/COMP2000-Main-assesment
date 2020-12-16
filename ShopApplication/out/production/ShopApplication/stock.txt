@@ -1,4 +1,4 @@
-Mellon;10.0;99529
+Mellon;10.0;99526
 Carrot;143.0;2
 Blow up dolls;13.0;9
-Jasper;12.0;69
+Jasper;12.0;60
