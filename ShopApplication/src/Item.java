@@ -11,8 +11,4 @@ public class Item{
         stock =  in_stock;
     }
 
-    public String output(){
-        return (id + price + stock);
-    }
-
 }

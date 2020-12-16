@@ -31,9 +31,9 @@ public class mainForm {
             public void actionPerformed(ActionEvent e) {
                 //JOptionPane.showMessageDialog(null, txt_scan.getText());
                 scanItem(txt_scan.getText());
-
             }
         });
+
         btn_order.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,16 +42,15 @@ public class mainForm {
                  frame.setContentPane(new paymentForm().pnl_payment);
                  frame.setTitle("Payment");
                  frame.pack();
-
-
             }
         });
+
         btn_admin.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { }
+            public void actionPerformed(ActionEvent e) {
+                openAdminForm();
+            }
         });
-
-
     }
 
     //Remove the items from the stock
@@ -69,39 +68,28 @@ public class mainForm {
         }
     }
 
-
-    //Lets add a check stock feature here. Remember we don't have to save the array till it is done
     public void scanItem(String itemID){
         for (Item item : storeStock) {
-            if (item.id.equals(itemID)){
+            if (item.id.equals(itemID)){ //Checks to see if the item has already been scanned
                 System.out.println("Item scanned");
-
                 currentPrice += item.price;
-
-                //Checks to see if the item has allready been scanned
-
                 scannedItems.add(itemID);
                 txt_mainOutput.append(itemID + "\n");
-
                 lb_currentPrice.setText("Total price: £" + String.valueOf(currentPrice));
                 return;
-
-                // If the item.stock is 0, then something should be done about that
             }
         }
-
-        JOptionPane.showMessageDialog(null,"could not find item in stock");
-
+        JOptionPane.showMessageDialog(null,"could not find item in stock"); //Shows a message if their is no stock left
     }
 
     public static void main(String[] args) {
         loadFile(dataFile);
 
-
         frame.setContentPane(new mainForm().panel1);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(500, 400);
+        frame.setResizable(false);
         frame.setVisible(true);
 
     }
@@ -167,5 +155,18 @@ public class mainForm {
     }
 
 
+    public static void openAdminForm(){
+        JFrame adminFrame = new JFrame("Admin Frame");
+
+        adminForm adminForm = new adminForm();
+        adminFrame.setContentPane(adminForm.panel1);
+        adminFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        adminFrame.pack();
+        adminFrame.setSize(500, 400);
+        adminFrame.setResizable(false);
+        adminFrame.setVisible(true);
+
+        adminForm.startup();
+    }
 
 }

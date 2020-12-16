@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class paymentForm {
     private JButton btn_cardPay;
     private JButton btn_cashPay;
-    private JTextField tf_cashAmount;
+    private JTextField txt_cashAmount;
     public JPanel pnl_payment;
     private JLabel lb_currentPrice;
 
@@ -16,7 +16,7 @@ public class paymentForm {
         btn_cashPay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cashPay(tf_cashAmount.getText());
+                cashPay(txt_cashAmount.getText());
             }
         });
 
@@ -50,10 +50,7 @@ public class paymentForm {
                 System.out.println("No");
             }
         }
-
         mainForm.saveFile();
-
-
     }
 
     public void cashPay(String cashText){
@@ -64,7 +61,7 @@ public class paymentForm {
             currentCash = Float.parseFloat(cashText);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Invalid cash input");
-            tf_cashAmount.setText("");
+            txt_cashAmount.setText("");
             return;
         }
 
@@ -79,7 +76,7 @@ public class paymentForm {
         }
 
         lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
-        tf_cashAmount.setText("");
+        txt_cashAmount.setText("");
 
 
         if (mainForm.currentPrice <= 0){
@@ -89,7 +86,7 @@ public class paymentForm {
 
         paymentMethod = "cash";
         mainForm.saveFile();
-        //getReceipt();
+
     }
 
 

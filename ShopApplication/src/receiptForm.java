@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class receiptForm{
-    public JTextArea receiptOutput;
+    public JTextArea txt_receiptOutput;
     public JPanel pnl_receipt;
     private JButton btn_genReceipt;
     private JButton btn_finish;
@@ -40,7 +38,7 @@ public class receiptForm{
         catch(Exception e){;}
         finally{
             //sending the text to the text box
-            receiptOutput.setText(receiptString);
+            txt_receiptOutput.setText(receiptString);
         }
     }
 

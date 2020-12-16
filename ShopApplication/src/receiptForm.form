@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="4e41c" class="javax.swing.JTextArea" binding="receiptOutput">
+      <component id="4e41c" class="javax.swing.JTextArea" binding="txt_receiptOutput">
         <constraints>
           <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="200" height="10"/>
