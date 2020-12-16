@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class mainForm {
     private JTextField txt_scan;
@@ -81,16 +79,22 @@ public class mainForm {
     }
 
     public static void openAdminForm(){
+
         JFrame adminFrame = new JFrame("Admin Frame");
+//        AdminLoginForm adminLoginForm = new AdminLoginForm();
+//        adminFrame.setContentPane(adminLoginForm.panel1);
+
+
+
+
 
         adminForm adminForm = new adminForm();
         adminFrame.setContentPane(adminForm.panel1);
-        adminFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         adminFrame.pack();
         adminFrame.setSize(500, 400);
         adminFrame.setResizable(false);
         adminFrame.setVisible(true);
-
+//
         adminForm.startup();
     }
 
