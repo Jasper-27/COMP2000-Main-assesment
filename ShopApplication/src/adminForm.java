@@ -9,12 +9,19 @@ public class adminForm {
     private JButton btn_updateStock;
     private JTextField txt_numToAdd;
     private JTextField txt_item;
+    private JButton btn_save;
 
     public adminForm() {
         btn_updateStock.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               
+                updateStock();
+            }
+        });
+        btn_save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainForm.saveFile();
             }
         });
     }
@@ -30,5 +37,35 @@ public class adminForm {
         textArea1.setText(stock);
     }
 
+    public void updateStock(){
+        try{
+            String StockString = txt_item.getText();
+            int numberToAdd = Integer.parseInt(txt_numToAdd.getText());
+            System.out.println(StockString + numberToAdd);
+
+            int pos = findItem(StockString);
+
+            mainForm.storeStock.get(pos).stock += numberToAdd;
+
+            fillStock();
+
+
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Invalid input");
+        }
+
+        txt_numToAdd.setText("");
+        txt_item.setText("");
+    }
+
+    public int findItem(String in) {
+
+        for(Item item : mainForm.storeStock){
+            if(item.id.equals(in)){
+                return mainForm.storeStock.indexOf(item);
+            }
+        }
+        return -1; // Returning -1 shows that something went wrong, it should never actually happen
+    }
 
 }

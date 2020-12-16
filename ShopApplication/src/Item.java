@@ -10,5 +10,4 @@ public class Item{
         price = in_price;
         stock =  in_stock;
     }
-
 }
