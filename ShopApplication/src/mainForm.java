@@ -81,21 +81,14 @@ public class mainForm {
     public static void openAdminForm(){
 
         JFrame adminFrame = new JFrame("Admin Frame");
-//        AdminLoginForm adminLoginForm = new AdminLoginForm();
-//        adminFrame.setContentPane(adminLoginForm.panel1);
-
-
-
-
-
-        adminForm adminForm = new adminForm();
-        adminFrame.setContentPane(adminForm.panel1);
+        AdminLoginForm adminLoginForm = new AdminLoginForm();
+        adminFrame.setContentPane(adminLoginForm.panel1);
         adminFrame.pack();
-        adminFrame.setSize(500, 400);
+        adminFrame.setSize(300, 200);
         adminFrame.setResizable(false);
         adminFrame.setVisible(true);
 //
-        adminForm.startup();
+        //adminForm.startup();
     }
 
 }
