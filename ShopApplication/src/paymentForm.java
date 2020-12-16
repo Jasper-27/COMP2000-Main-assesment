@@ -17,8 +17,6 @@ public class paymentForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cashPay(tf_cashAmount.getText());
-
-
             }
         });
 
@@ -30,19 +28,6 @@ public class paymentForm {
             }
         });
     }
-
-    public static void main(String[] args) {
-        JFrame fr_payment = new JFrame("Payment Window");
-        fr_payment.setContentPane(new paymentForm().pnl_payment);
-        fr_payment.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        fr_payment.pack();
-        //frame.setSize(500, 400);
-        fr_payment.setResizable(false);
-        fr_payment.setVisible(true);
-
-
-    }
-
 
     public void cardPay(){
 
@@ -58,13 +43,8 @@ public class paymentForm {
                 mainForm.currentPrice = 0;
                 lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
                 paymentMethod = "card";
-                //receiptForm.main(null);
-
                 getReceipt();
-
-
                 //This is where the code to take the money out of their account would go
-
 
             } else {
                 System.out.println("No");
@@ -88,19 +68,15 @@ public class paymentForm {
             return;
         }
 
-
-
         change = currentCash - mainForm.currentPrice;
         mainForm.currentPrice = -change;
 
         System.out.println("Cash: " + currentCash + " CurrentPrice: " + mainForm.currentPrice + " change: " + change);
 
 
-
         if (change > 0){
             JOptionPane.showMessageDialog(null,"Here is your change: £" + change);
         }
-
 
         lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
         tf_cashAmount.setText("");
@@ -119,31 +95,8 @@ public class paymentForm {
 
 
     public void getReceipt(){
-        //receiptForm theReceipt = new receiptForm();
-
-//        mainWindow.frame = new JFrame("Receipt Window");
-//        //mainWindow.frame.setContentPane( new receiptForm().pnl_receipt);
-//
-//        mainWindow.frame.setContentPane(theReceipt.pnl_receipt);
-//        mainWindow.frame.setVisible(true);
-//        mainWindow.frame.setSize(500,400);
-
-
         mainForm.frame.setContentPane(new receiptForm().pnl_receipt);
         mainForm.frame.setTitle("Receipt");
         mainForm.frame.pack();
-//
-
-
-
-//        JFrame fr_receipt = new JFrame("Receipt Window");
-//        fr_receipt.setContentPane(new receiptForm().pnl_receipt);
-//        fr_receipt.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        fr_receipt.pack();
-//        fr_receipt.setSize(500, 400);
-//        fr_receipt.setResizable(false);
-//        fr_receipt.setVisible(true);
-
-
     }
 }

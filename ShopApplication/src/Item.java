@@ -15,5 +15,4 @@ public class Item{
         return (id + price + stock);
     }
 
-
 }

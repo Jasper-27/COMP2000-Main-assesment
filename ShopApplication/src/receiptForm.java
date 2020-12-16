@@ -26,13 +26,14 @@ public class receiptForm{
                 btn_genReceipt.setEnabled(false);
             }
         });
-
     }
 
 
+    //This is an example of MVP because the user interacts with the button, this then tells the model (receipt) to start calculating,
+    //Then it gets the calculation back and updates
+
     public void genReceipt(){
         receiptThread.start();
-
 
         //When that receipt has finished, populat the text box
         try{receiptForm.receiptThread.join();}
