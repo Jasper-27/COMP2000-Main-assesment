@@ -30,10 +30,7 @@ public class Stock {
         return pos; // Returning -1 shows that something went wrong, it should never actually happen
     }
 
-    public Item getItem(String id){
-        int pos = storeStock.indexOf(id);
-        return storeStock.get(pos);
-    }
+
 
     public void loadFile(){
         System.out.println("Loading file:");
