@@ -19,6 +19,7 @@ public class mainForm {
 
     public static List<String> scannedItems = new ArrayList();
     public static JFrame frame = new JFrame("mainWindow");
+    public static JFrame adminFrame = new JFrame("Admin Frame");
 
 
     public static Stock stock = new Stock();
@@ -80,7 +81,7 @@ public class mainForm {
 
     public static void openAdminForm(){
 
-        JFrame adminFrame = new JFrame("Admin Frame");
+
         AdminLoginForm adminLoginForm = new AdminLoginForm();
         adminFrame.setContentPane(adminLoginForm.panel1);
         adminFrame.pack();

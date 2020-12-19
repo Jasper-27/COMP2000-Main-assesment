@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.constant.Constable;
 
-public class adminForm {
+public class AdminForm {
     public JPanel panel1;
     private JTextArea textArea1;
     private JButton btn_updateStock;
@@ -11,7 +11,7 @@ public class adminForm {
     private JTextField txt_item;
     private JButton btn_save;
 
-    public adminForm() {
+    public AdminForm() {
         btn_updateStock.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,6 +29,7 @@ public class adminForm {
     public void startup(){
         fillStock();
     }
+
     public void fillStock(){
         String stock = "";
         for(Item item : mainForm.stock.storeStock){
@@ -43,7 +44,7 @@ public class adminForm {
             int numberToAdd = Integer.parseInt(txt_numToAdd.getText());
             System.out.println(StockString + numberToAdd);
 
-            int pos = findItem(StockString);
+            int pos = mainForm.stock.findItem(StockString);
 
             mainForm.stock.storeStock.get(pos).stock += numberToAdd;
 
@@ -56,16 +57,6 @@ public class adminForm {
 
         txt_numToAdd.setText("");
         txt_item.setText("");
-    }
-
-    public int findItem(String in) {
-
-        for(Item item : mainForm.stock.storeStock){
-            if(item.id.equals(in)){
-                return mainForm.stock.storeStock.indexOf(item);
-            }
-        }
-        return -1; // Returning -1 shows that something went wrong, it should never actually happen
     }
 
 }

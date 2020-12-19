@@ -1,18 +1,6 @@
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.util.Arrays;
-import java.util.Base64;
-import java.security.SecureRandom;
-import java.util.Random;
 
 
 public class AdminLoginForm {
@@ -49,12 +37,25 @@ public class AdminLoginForm {
 
         if (admins.verifyAdmin(username, password) == true){
             System.out.println("login");
+
+
+            AdminForm adminForm = new AdminForm();
+            mainForm.adminFrame.setContentPane(adminForm.panel1);
+
+            mainForm.adminFrame.pack();
+            mainForm.adminFrame.setSize(500, 400);
+            adminForm.startup();
+
+
+
+
+
         }else {
             JOptionPane.showMessageDialog(null,"Invalid password");
             return;
         }
 
-        
+
 
     }
 
