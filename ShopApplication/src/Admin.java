@@ -1,19 +1,19 @@
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Admin {
-    private String username;
-    private int passwordHash;
+    public String username;
+    public String passwordHash;
 
 
     //Constructor
-    public Admin(String in_username, int in_passwordHash){
+    public Admin(String in_username, String in_Hash){
         username = in_username;
-        passwordHash = in_passwordHash;
+        passwordHash = in_Hash;
     }
 
-    public boolean verify(String in_password){
-        if (in_password.hashCode() == passwordHash){
-            return true;
-        }else {
-            return false;
-        }
-    }
+
+
+
 }

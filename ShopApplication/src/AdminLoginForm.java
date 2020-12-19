@@ -21,6 +21,10 @@ public class AdminLoginForm {
     private JTextField txt_username;
     private JButton Login;
 
+    private Admins admins = new Admins();
+
+
+
     public AdminLoginForm() {
         Login.addActionListener(new ActionListener() {
             @Override
@@ -31,40 +35,30 @@ public class AdminLoginForm {
     }
 
     public void login(){
+        admins.loadFile();
 
         String username = txt_username.getText();
         String password = pw_password.getText();
-       
-        System.out.println(hash(password));
-        System.out.println(hash("password"));
 
+        System.out.println("CHECK_1");
 
-
-
-
-
-
-    }
-
-    public String hash(String password){
-        byte[] salt = "1^�=,5Nsaf32324dfsdfJasperWuzHere����K4".getBytes();
-
-
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        if (admins.checkAdmin(username) == false){
+            JOptionPane.showMessageDialog(null,"Invalid username");
+            return;
         }
-        md.update(salt);
-        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
-        String hash = new String(hashedPassword, StandardCharsets.UTF_8);
 
-        String stringSalt = new String(salt, StandardCharsets.UTF_8);
-        //System.out.println("Salt: " + stringSalt);
-        //System.out.println("Hash: " + hash);
-        return hash;
+        if (admins.verifyAdmin(username, password) == true){
+            System.out.println("login");
+        }else {
+            JOptionPane.showMessageDialog(null,"Invalid password");
+            return;
+        }
+
+        
+
     }
+
+
 
 
 
