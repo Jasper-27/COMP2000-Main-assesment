@@ -11,6 +11,7 @@ public class AdminForm {
     public AdminForm() {
         btn_updateStock.addActionListener(e -> updateStock());
         btn_save.addActionListener(e -> mainForm.stock.saveFile());
+
     }
 
     public void startup(){
