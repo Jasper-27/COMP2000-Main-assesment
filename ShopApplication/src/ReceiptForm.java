@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class receiptForm{
+public class ReceiptForm {
     public JTextArea txt_receiptOutput;
     public JPanel pnl_receipt;
     private JButton btn_genReceipt;
@@ -8,17 +8,17 @@ public class receiptForm{
 
     public static String receiptString = "";
 
-    static public receipt receipt = new receipt();
+    static public Receipt receipt = new Receipt();
 
-    public receiptForm() {
+    public ReceiptForm() {
         btn_genReceipt.addActionListener(e -> {
             genReceipt();
             btn_genReceipt.setEnabled(false);
         });
         btn_finish.addActionListener(e -> {
-            mainForm.scannedItems.clear();
-            mainForm.main(null);
-            mainForm.currentPrice = 0f;
+            MainForm.scannedItems.clear();
+            MainForm.main(null);
+            MainForm.currentPrice = 0f;
         });
     }
 

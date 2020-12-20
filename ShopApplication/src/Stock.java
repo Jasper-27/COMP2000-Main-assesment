@@ -24,7 +24,7 @@ public class Stock {
     }
 
     public void loadFile(){
-        mainForm.stock.storeStock.clear(); // clears the stock so it does not get duplicated
+        MainForm.stock.storeStock.clear(); // clears the stock so it does not get duplicated
         try {
             File myFile = new File(dataFile);
             Scanner myReader = new Scanner(myFile);

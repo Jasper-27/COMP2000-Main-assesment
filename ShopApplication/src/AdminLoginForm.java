@@ -25,9 +25,9 @@ public class AdminLoginForm {
 
         if (admins.verifyAdmin(username, password) == true){
             AdminForm adminForm = new AdminForm();
-            mainForm.adminFrame.setContentPane(adminForm.panel1);
-            mainForm.adminFrame.pack();
-            mainForm.adminFrame.setSize(500, 400);
+            MainForm.adminFrame.setContentPane(adminForm.panel1);
+            MainForm.adminFrame.pack();
+            MainForm.adminFrame.setSize(500, 400);
 
         }else {
             JOptionPane.showMessageDialog(null,"Invalid password");

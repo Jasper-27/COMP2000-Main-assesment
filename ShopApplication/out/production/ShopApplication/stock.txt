@@ -1,6 +1,6 @@
-Mellon;10.0;99497
+Mellon;10.0;99493
 Carrot;143.0;25
 Blow up dolls;13.0;9
 Jasper;12.0;69
 Cow;12.0;469
-LungCageTickets;100;20
+LungCageTickets;100.0;20

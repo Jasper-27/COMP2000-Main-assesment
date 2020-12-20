@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class paymentForm {
+public class PaymentForm {
     private JButton btn_cardPay;
     private JButton btn_cashPay;
     private JTextField txt_cashAmount;
@@ -10,26 +10,26 @@ public class paymentForm {
     public static String paymentMethod;
     public static Float change = 0f;
 
-    public paymentForm() {
+    public PaymentForm() {
         btn_cashPay.addActionListener(e -> cashPay(txt_cashAmount.getText()));
 
-        lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
+        lb_currentPrice.setText("Owed: £" + MainForm.currentPrice);
 
         btn_cardPay.addActionListener(e -> cardPay());
     }
 
     public void cardPay(){
 
-        if (mainForm.currentPrice < 0){
+        if (MainForm.currentPrice < 0){
             JOptionPane.showMessageDialog(null,"Nothing for you to pay");
         }else {
 
             //Yes/no dialogue box
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Confirm payment of: £" + mainForm.currentPrice, "Card payment", dialogButton);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Confirm payment of: £" + MainForm.currentPrice, "Card payment", dialogButton);
             if(dialogResult == 0) {
-                mainForm.currentPrice = 0;
-                lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
+                MainForm.currentPrice = 0;
+                lb_currentPrice.setText("Owed: £" + MainForm.currentPrice);
                 paymentMethod = "card";
                 getReceipt();
 
@@ -39,7 +39,7 @@ public class paymentForm {
                 JOptionPane.showMessageDialog(null, "Please select other payment method");
             }
         }
-        mainForm.stock.saveFile();
+        MainForm.stock.saveFile();
     }
 
     public void cashPay(String cashText){
@@ -52,28 +52,28 @@ public class paymentForm {
             return;
         }
 
-        change = currentCash - mainForm.currentPrice;
-        mainForm.currentPrice = -change;
+        change = currentCash - MainForm.currentPrice;
+        MainForm.currentPrice = -change;
 
         if (change > 0){
             JOptionPane.showMessageDialog(null,"Here is your change: £" + change);
         }
 
-        lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
+        lb_currentPrice.setText("Owed: £" + MainForm.currentPrice);
         txt_cashAmount.setText("");
 
-        if (mainForm.currentPrice <= 0){
+        if (MainForm.currentPrice <= 0){
             lb_currentPrice.setText("");
             getReceipt();
         }
 
         paymentMethod = "cash";
-        mainForm.stock.saveFile();
+        MainForm.stock.saveFile();
     }
 
     public void getReceipt(){
-        mainForm.frame.setContentPane(new receiptForm().pnl_receipt);
-        mainForm.frame.setTitle("Receipt");
-        mainForm.frame.pack();
+        MainForm.frame.setContentPane(new ReceiptForm().pnl_receipt);
+        MainForm.frame.setTitle("Receipt");
+        MainForm.frame.pack();
     }
 }

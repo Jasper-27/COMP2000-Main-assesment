@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class mainForm {
+public class MainForm {
     private JTextField txt_scan;
     private JPanel panel1;
     private JButton btn_scan;
@@ -20,12 +20,12 @@ public class mainForm {
 
     public static Stock stock = new Stock();
 
-    public mainForm() {
+    public MainForm() {
         btn_scan.addActionListener(e -> scanItem(txt_scan.getText()));
 
         btn_order.addActionListener(e -> {
             stock.order(scannedItems);
-            frame.setContentPane(new paymentForm().pnl_payment);
+            frame.setContentPane(new PaymentForm().pnl_payment);
             frame.setTitle("Payment");
             frame.pack();
         });
@@ -49,7 +49,7 @@ public class mainForm {
     public static void main(String[] args) {
         stock.loadFile();
 
-        frame.setContentPane(new mainForm().panel1);
+        frame.setContentPane(new MainForm().panel1);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(500, 400);
