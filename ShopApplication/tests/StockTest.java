@@ -5,8 +5,7 @@ import org.junit.After;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class StockTest { 
 
@@ -31,9 +30,7 @@ public class StockTest {
         scannedItems.clear();
         stock = new Stock();
         stock.loadFile();
-
     }
-
 
 
     @Test
@@ -46,7 +43,7 @@ public class StockTest {
     public void testOrder() throws Exception {
         stock.order(scannedItems);
         Stock stock2 = new Stock();
-        assertFalse(stock.equals(stock2));
+        assertNotEquals(stock, stock2);
 
     }
 
