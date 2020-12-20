@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,16 +8,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Admins {
-
     public List<Admin> admins = new ArrayList();
     public String dataFile = "Resources/admin.txt";
 
-
     public boolean verifyAdmin(String username, String password){
-        System.out.println("CHECK_2");
         Admin admin = getAdmin(username);
-        System.out.println("CHECK_4");
-
         if (admin.passwordHash.equals(hash(password))){
             return true;
         }else{
@@ -33,8 +27,6 @@ public class Admins {
                 pos = admins.indexOf(admin);
             }
         }
-        System.out.println(pos);
-
         if (pos == -1){
             return  null;
         }else {
@@ -52,10 +44,7 @@ public class Admins {
         }
     }
 
-
     public void loadFile(){
-        System.out.println("Loading file:");
-
         try {
             File myFile = new File(dataFile);
             Scanner myReader = new Scanner(myFile);
@@ -63,15 +52,12 @@ public class Admins {
             //While there is another line to read, read it and output the data
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-
                 String[] arrOfStr = data.split(";", 2);
 
                 try{
                     String username = arrOfStr[0];
                     String hash = arrOfStr[1];
                     Admin tempAdmin = new Admin(username, hash);
-
-                    System.out.println(tempAdmin.username + " " + tempAdmin.passwordHash);
                     admins.add(tempAdmin);
                 }catch(Exception e){
                     System.out.println(e);
@@ -81,8 +67,6 @@ public class Admins {
         } catch (FileNotFoundException e) { //Prints an error if the file is not found
             e.printStackTrace();
         }
-
-        System.out.println("File loading complete");
     }
 
 
@@ -100,7 +84,6 @@ public class Admins {
         md.update(salt);
         byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
         String hash = new String(hashedPassword, StandardCharsets.UTF_8);
-
         String stringSalt = new String(salt, StandardCharsets.UTF_8);
         return hash;
     }
