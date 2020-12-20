@@ -11,11 +11,13 @@ public class receipt extends Thread{
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
+        receiptString += (mainForm.company) +"\n";
         receiptString += (dtf.format(now) +"\n");
         receiptString += "Payment method: " + paymentForm.paymentMethod + "\n";
         receiptString += "====================\n";
 
 
+        //adding the items to the receipt string
         for(String ordered : mainForm.scannedItems){
             for (Item item : mainForm.stock.storeStock){
                 if (ordered.equalsIgnoreCase(item.id)){
@@ -35,7 +37,6 @@ public class receipt extends Thread{
         System.out.println(paymentForm.change);
 
        receiptForm.receiptString = receiptString;
-       System.out.println(receiptString);
     }
 }
 

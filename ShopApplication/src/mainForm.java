@@ -14,7 +14,7 @@ public class mainForm {
     private JLabel lb_currentPrice;
     public static float currentPrice;
 
-    public String company = "Company";
+    public static String company = "Company";
 
 
     public static List<String> scannedItems = new ArrayList();
