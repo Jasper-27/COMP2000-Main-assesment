@@ -10,7 +10,7 @@ public class receiptForm{
     public static String receiptString = "";
 
     static public receipt receipt = new receipt();
-    static public Thread receiptThread = new Thread(receipt);
+    //static public Thread receiptThread = new Thread(receipt);
 
 
     public receiptForm() {
@@ -24,6 +24,7 @@ public class receiptForm{
         btn_finish.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mainForm.scannedItems = null;
                 mainForm.main(null);
             }
         });
@@ -34,10 +35,12 @@ public class receiptForm{
     //Then it gets the calculation back and updates
 
     public void genReceipt(){
+
+        Thread receiptThread = new Thread(receipt);
         receiptThread.start();
 
-        //When that receipt has finished, populat the text box
-        try{receiptForm.receiptThread.join();}
+        //When that receipt has finished, populate the text box
+        try{receiptThread.join();}
         catch(Exception e){;}
         finally{
             //sending the text to the text box
