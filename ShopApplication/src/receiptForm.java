@@ -14,19 +14,13 @@ public class receiptForm{
 
 
     public receiptForm() {
-        btn_genReceipt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                genReceipt();
-                btn_genReceipt.setEnabled(false);
-            }
+        btn_genReceipt.addActionListener(e -> {
+            genReceipt();
+            btn_genReceipt.setEnabled(false);
         });
-        btn_finish.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainForm.scannedItems = null;
-                mainForm.main(null);
-            }
+        btn_finish.addActionListener(e -> {
+            mainForm.scannedItems = null;
+            mainForm.main(null);
         });
     }
 
@@ -47,5 +41,4 @@ public class receiptForm{
             txt_receiptOutput.setText(receiptString);
         }
     }
-
 }

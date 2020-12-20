@@ -56,7 +56,6 @@ public class Admins {
     public void loadFile(){
         System.out.println("Loading file:");
 
-        //Item tempItem = new Item(null, null, null);
         try {
             File myFile = new File(dataFile);
             Scanner myReader = new Scanner(myFile);
@@ -88,9 +87,9 @@ public class Admins {
 
 
 
+    //Generates a hash of the password
     public String hash(String password){
         byte[] salt = "1^�=,5Nsaf32324dfsdfJasperWuzHere����K4".getBytes();
-
 
         MessageDigest md = null;
         try {

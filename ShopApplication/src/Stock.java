@@ -14,10 +14,7 @@ public class Stock {
 
     public void order(List<String> toOrder){
         for(String string : toOrder){
-            System.out.println(string);
-            System.out.println(storeStock.get(findItem(string)).stock);
             storeStock.get(findItem(string)).stock += -1;
-            System.out.println(storeStock.get(findItem(string)).stock);
         }
     }
     public int findItem(String id){
@@ -33,20 +30,13 @@ public class Stock {
 
 
     public void loadFile(){
-        System.out.println("Loading file:");
-
-        //Item tempItem = new Item(null, null, null);
         try {
             File myFile = new File(dataFile);
             Scanner myReader = new Scanner(myFile);
-            String outString = "";
 
-            //While there is another line to read, read it and output the data
-            while (myReader.hasNextLine()) {
+            while (myReader.hasNextLine()) { //While there is another line to read, read it and output the data
                 String data = myReader.nextLine();
-
                 String[] arrOfStr = data.split(";", 3);
-
                 try{
                     Float price = Float.valueOf(arrOfStr[1]);
                     Integer stock = Integer.valueOf(arrOfStr[2]);
@@ -60,22 +50,19 @@ public class Stock {
         } catch (FileNotFoundException e) { //Prints an error if the file is not found
             e.printStackTrace();
         }
-
-        System.out.println("File loading complete");
     }
 
     public void saveFile(){
         String outString;
-        BufferedWriter writer = null;
+        BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(dataFile));
 
-            for (Item item : storeStock)
-            {
+            for (Item item : storeStock) {
                 outString = item.id + ";" + item.price + ";" + item.stock + "\n";
-                //System.out.println(outString);
                 writer.append(outString);
             }
+
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

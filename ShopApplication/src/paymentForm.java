@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class paymentForm {
     private JButton btn_cardPay;
@@ -13,20 +11,11 @@ public class paymentForm {
     public static Float change = 0f;
 
     public paymentForm() {
-        btn_cashPay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cashPay(txt_cashAmount.getText());
-            }
-        });
+        btn_cashPay.addActionListener(e -> cashPay(txt_cashAmount.getText()));
 
         lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
-        btn_cardPay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardPay();
-            }
-        });
+
+        btn_cardPay.addActionListener(e -> cardPay());
     }
 
     public void cardPay(){
@@ -39,24 +28,22 @@ public class paymentForm {
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(null, "Confirm payment of: £" + mainForm.currentPrice, "Card payment", dialogButton);
             if(dialogResult == 0) {
-                System.out.println("Yes");
                 mainForm.currentPrice = 0;
                 lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
                 paymentMethod = "card";
                 getReceipt();
+
                 //This is where the code to take the money out of their account would go
 
-            } else {
-                System.out.println("No");
+            }else{
+                JOptionPane.showMessageDialog(null, "Please select other payment method");
             }
         }
         mainForm.stock.saveFile();
     }
 
     public void cashPay(String cashText){
-
-        float currentCash = 0f;
-
+        float currentCash;
         try{
             currentCash = Float.parseFloat(cashText);
         }catch (Exception e){
@@ -68,16 +55,12 @@ public class paymentForm {
         change = currentCash - mainForm.currentPrice;
         mainForm.currentPrice = -change;
 
-        System.out.println("Cash: " + currentCash + " CurrentPrice: " + mainForm.currentPrice + " change: " + change);
-
-
         if (change > 0){
             JOptionPane.showMessageDialog(null,"Here is your change: £" + change);
         }
 
         lb_currentPrice.setText("Owed: £" + mainForm.currentPrice);
         txt_cashAmount.setText("");
-
 
         if (mainForm.currentPrice <= 0){
             lb_currentPrice.setText("");
@@ -86,7 +69,6 @@ public class paymentForm {
 
         paymentMethod = "cash";
         mainForm.stock.saveFile();
-
     }
 
     public void getReceipt(){
