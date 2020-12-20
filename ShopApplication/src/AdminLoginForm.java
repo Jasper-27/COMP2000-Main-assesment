@@ -4,12 +4,12 @@ public class AdminLoginForm {
     public JPanel panel1;
     private JPasswordField pw_password;
     private JTextField txt_username;
-    private JButton Login;
+    private JButton btn_login;
 
     private Admins admins = new Admins();
 
     public AdminLoginForm() {
-        Login.addActionListener(e -> login());
+        btn_login.addActionListener(e -> login());
     }
 
     public void login(){
