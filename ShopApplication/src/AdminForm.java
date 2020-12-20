@@ -11,12 +11,10 @@ public class AdminForm {
     public AdminForm() {
         btn_updateStock.addActionListener(e -> updateStock());
         btn_save.addActionListener(e -> mainForm.stock.saveFile());
-
-    }
-
-    public void startup(){
         fillStock();
     }
+
+
 
     public void fillStock(){
         String stock = "";
@@ -28,6 +26,10 @@ public class AdminForm {
 
     public void updateStock(){
         try{
+            String StockString = txt_item.getText();
+            int numberToAdd = Integer.parseInt(txt_numToAdd.getText());
+            int pos = mainForm.stock.findItem(StockString);
+            mainForm.stock.storeStock.get(pos).stock += numberToAdd;
             fillStock();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Invalid input");

@@ -28,7 +28,7 @@ public class AdminLoginForm {
             mainForm.adminFrame.setContentPane(adminForm.panel1);
             mainForm.adminFrame.pack();
             mainForm.adminFrame.setSize(500, 400);
-            adminForm.startup();
+            
         }else {
             JOptionPane.showMessageDialog(null,"Invalid password");
             return;
