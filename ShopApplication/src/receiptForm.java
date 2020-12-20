@@ -18,7 +18,7 @@ public class receiptForm{
         btn_finish.addActionListener(e -> {
             mainForm.scannedItems.clear();
             mainForm.main(null);
-            mainForm.currentPrice = 0f; 
+            mainForm.currentPrice = 0f;
         });
     }
 

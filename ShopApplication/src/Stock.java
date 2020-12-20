@@ -30,6 +30,7 @@ public class Stock {
 
 
     public void loadFile(){
+        mainForm.stock.storeStock.clear(); // clears the stock so it does not get duplicated
         try {
             File myFile = new File(dataFile);
             Scanner myReader = new Scanner(myFile);
@@ -53,7 +54,7 @@ public class Stock {
     }
 
     public void saveFile(){
-        String outString;
+        String outString = "";
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(dataFile));
@@ -67,5 +68,7 @@ public class Stock {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
