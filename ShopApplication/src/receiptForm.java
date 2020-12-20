@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.event.*;
 
 public class receiptForm{
     public JTextArea txt_receiptOutput;
@@ -10,8 +9,6 @@ public class receiptForm{
     public static String receiptString = "";
 
     static public receipt receipt = new receipt();
-    //static public Thread receiptThread = new Thread(receipt);
-
 
     public receiptForm() {
         btn_genReceipt.addActionListener(e -> {
@@ -29,12 +26,10 @@ public class receiptForm{
     //Then it gets the calculation back and updates
 
     public void genReceipt(){
-
         Thread receiptThread = new Thread(receipt);
         receiptThread.start();
 
-        //When that receipt has finished, populate the text box
-        try{receiptThread.join();}
+        try{receiptThread.join();} //When that receipt has finished, populate the text box
         catch(Exception e){;}
         finally{
             //sending the text to the text box
