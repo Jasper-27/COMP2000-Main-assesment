@@ -13,15 +13,18 @@ public class receiptForm{
     static public Thread receiptThread = new Thread(receipt);
 
 
-
-    //private static String receiptText = "";
-
     public receiptForm() {
         btn_genReceipt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 genReceipt();
                 btn_genReceipt.setEnabled(false);
+            }
+        });
+        btn_finish.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainForm.main(null);
             }
         });
     }

@@ -3,8 +3,6 @@ import java.time.format.DateTimeFormatter;
 
 public class receipt extends Thread{
     public void run(){ //starts the loading of the file, and starts the listening thread.
-        System.out.println("The thread is starting");
-
         String receiptString = "";
         Float orderTotal = 0f;
 
@@ -33,8 +31,6 @@ public class receipt extends Thread{
         if (paymentForm.paymentMethod == "cash"){
             receiptString += "Change: £ " + paymentForm.change;
         }
-
-        System.out.println(paymentForm.change);
 
        receiptForm.receiptString = receiptString;
     }
