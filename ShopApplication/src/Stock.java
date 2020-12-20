@@ -7,10 +7,6 @@ public class Stock {
     public List<Item> storeStock = new ArrayList();
     public String dataFile = "Resources/stock.txt";
 
-    public void updateStock(String id, int stock){
-        int pos = findItem(id);
-        storeStock.get(pos).stock += stock;
-    }
 
     public void order(List<String> toOrder){
         for(String string : toOrder){
@@ -26,8 +22,6 @@ public class Stock {
         }
         return pos; // Returning -1 shows that something went wrong, it should never actually happen
     }
-
-
 
     public void loadFile(){
         mainForm.stock.storeStock.clear(); // clears the stock so it does not get duplicated
