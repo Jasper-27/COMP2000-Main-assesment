@@ -32,7 +32,6 @@ public class Admins {
         }else {
             return admins.get(pos);
         }
-
     }
 
     //Check if the admin exists
