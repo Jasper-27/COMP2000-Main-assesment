@@ -1,11 +1,12 @@
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainForm {
     private JTextField txt_scan;
     private JPanel panel1;
-    private JButton btn_scan;
     private JButton btn_order;
     private JButton btn_admin;
     private JTextArea txt_mainOutput;
@@ -19,9 +20,12 @@ public class MainForm {
 
 
     public static Stock stock = new Stock();
+    private int count = 0;
 
     public MainForm() {
-        btn_scan.addActionListener(e -> scanItem(txt_scan.getText()));
+
+        txt_scan.requestFocus();
+
 
         btn_order.addActionListener(e -> {
             stock.order(scannedItems);
@@ -31,15 +35,32 @@ public class MainForm {
         });
 
         btn_admin.addActionListener(e -> openAdminForm());
+        txt_scan.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+
+                count = count + 1;
+                System.out.println(count);
+
+                if (count == 11) {
+                    scanItem(txt_scan.getText());
+                    count = 0;
+                }
+
+            }
+        });
     }
 
-    public void scanItem(String itemID){
-        int stockLocation = stock.findItem(itemID);
+    public void scanItem(String itemCode){
+        System.out.println("scanned");
+        int stockLocation = stock.findItem(itemCode);
         if (stockLocation > -1){        //Error checking to make sure the item was in stock
             currentPrice += stock.storeStock.get(stockLocation).price;
-            scannedItems.add(itemID);
-            txt_mainOutput.append(itemID + "\n");
+            scannedItems.add(itemCode);
+            txt_mainOutput.append(stock.storeStock.get(stockLocation).name +" (£" +stock.storeStock.get(stockLocation).price + ")\n");
             lb_currentPrice.setText("Total price: £" + currentPrice);
+            txt_scan.setText("");
             return;
         }
 

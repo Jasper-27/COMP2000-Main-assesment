@@ -14,10 +14,8 @@ public class StockTest {
     public void before() throws Exception {
         stock = new Stock();
 
-        scannedItems.add("Jasper");
-        scannedItems.add("Jasper");
-        scannedItems.add("Jasper");
-        scannedItems.add("Mellon");
+        scannedItems.add("0548933340");
+        scannedItems.add("0548618172");
         stock.loadFile();
     }
 

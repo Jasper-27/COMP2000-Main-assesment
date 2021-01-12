@@ -17,7 +17,7 @@ public class AdminForm {
     public void fillStock(){
         String stock = "";
         for(Item item : MainForm.stock.storeStock){
-            stock += item.id + "    |   " + item.stock + "\n";
+            stock += item.name + "    |   " + item.stock + "\n";
         }
         textArea1.setText(stock);
     }

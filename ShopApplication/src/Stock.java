@@ -15,10 +15,20 @@ public class Stock {
     }
 
     //Returns the position of the item in the array
-    public int findItem(String id){
+    public int findItem(String code){
         int pos = -1;
         for(Item item : storeStock){
-            if(item.id.equals(id)){
+            if(item.code.equals(code)){
+                pos = storeStock.indexOf(item);
+            }
+        }
+        return pos; // Returning -1 shows that something went wrong, it should never actually happen
+    }
+
+    public int findItemByName(String name){
+        int pos = -1;
+        for(Item item : storeStock){
+            if(item.name.equals(name)){
                 pos = storeStock.indexOf(item);
             }
         }
@@ -33,11 +43,12 @@ public class Stock {
 
             while (myReader.hasNextLine()) { //While there is another line to read, read it and output the data
                 String data = myReader.nextLine();
-                String[] arrOfStr = data.split(";", 3);
+                System.out.println(data);
+                String[] arrOfStr = data.split(";", 4);
                 try{
-                    Float price = Float.valueOf(arrOfStr[1]);
-                    Integer stock = Integer.valueOf(arrOfStr[2]);
-                    Item tempItem = new Item(arrOfStr[0], price, stock);
+                    Float price = Float.valueOf(arrOfStr[2]);
+                    Integer stock = Integer.valueOf(arrOfStr[3]);
+                    Item tempItem = new Item(arrOfStr[0], arrOfStr[1], price, stock);
                     storeStock.add(tempItem);
                 }catch(Exception e){
                     System.out.println(e);
@@ -47,6 +58,8 @@ public class Stock {
         } catch (FileNotFoundException e) { //Prints an error if the file is not found
             e.printStackTrace();
         }
+
+        System.out.println(MainForm.stock.storeStock);
     }
 
     public void saveFile(){
@@ -56,7 +69,7 @@ public class Stock {
             writer = new BufferedWriter(new FileWriter(dataFile));
 
             for (Item item : storeStock) {
-                outString = item.id + ";" + item.price + ";" + item.stock + "\n";
+                outString = item.code + ";" + item.name + ";" + item.price + ";" + item.stock + "\n";
                 writer.append(outString);
             }
 
