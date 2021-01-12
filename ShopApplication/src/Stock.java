@@ -13,6 +13,8 @@ public class Stock {
             storeStock.get(findItem(string)).stock += -1;
         }
     }
+
+    //Returns the position of the item in the array
     public int findItem(String id){
         int pos = -1;
         for(Item item : storeStock){

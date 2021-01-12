@@ -4,7 +4,7 @@ public class AdminForm {
     public JPanel panel1;
     private JTextArea textArea1;
     private JButton btn_updateStock;
-    private JTextField txt_numToAdd;
+    private JTextField txt_newStock;
     private JTextField txt_item;
     private JButton btn_save;
 
@@ -13,8 +13,6 @@ public class AdminForm {
         btn_save.addActionListener(e -> MainForm.stock.saveFile());
         fillStock();
     }
-
-
 
     public void fillStock(){
         String stock = "";
@@ -27,14 +25,14 @@ public class AdminForm {
     public void updateStock(){
         try{
             String StockString = txt_item.getText();
-            int numberToAdd = Integer.parseInt(txt_numToAdd.getText());
+            int newStock = Integer.parseInt(txt_newStock.getText());
             int pos = MainForm.stock.findItem(StockString);
-            MainForm.stock.storeStock.get(pos).stock += numberToAdd;
+            MainForm.stock.storeStock.get(pos).stock = newStock;
             fillStock();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Invalid input");
         }
-        txt_numToAdd.setText("");
+        txt_newStock.setText("");
         txt_item.setText("");
     }
 }
