@@ -43,7 +43,6 @@ public class Stock {
 
             while (myReader.hasNextLine()) { //While there is another line to read, read it and output the data
                 String data = myReader.nextLine();
-                System.out.println(data);
                 String[] arrOfStr = data.split(";", 4);
                 try{
                     Float price = Float.valueOf(arrOfStr[2]);
@@ -58,8 +57,6 @@ public class Stock {
         } catch (FileNotFoundException e) { //Prints an error if the file is not found
             e.printStackTrace();
         }
-
-        System.out.println(MainForm.stock.storeStock);
     }
 
     public void saveFile(){

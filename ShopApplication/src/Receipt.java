@@ -17,7 +17,6 @@ public class Receipt extends Thread{
 
         //adding the items to the receipt string
         for(String ordered : MainForm.scannedItems){
-            System.out.println(MainForm.scannedItems);
             for (Item item : MainForm.stock.storeStock){
                 if (ordered.equalsIgnoreCase(item.code)){
                     receiptString += item.name + " | £" + item.price + "\n";

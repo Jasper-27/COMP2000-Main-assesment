@@ -26,7 +26,7 @@ public class AdminForm {
         try{
             String StockString = txt_item.getText();
             int newStock = Integer.parseInt(txt_newStock.getText());
-            int pos = MainForm.stock.findItem(StockString);
+            int pos = MainForm.stock.findItemByName(StockString);
             MainForm.stock.storeStock.get(pos).stock = newStock;
             fillStock();
         }catch (Exception e){
