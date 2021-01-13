@@ -11,16 +11,17 @@ public class MainForm {
     private JButton btn_admin;
     private JTextArea txt_mainOutput;
     private JLabel lb_currentPrice;
-    public static float currentPrice;
+
 
     public static String company = "Company";
     public static List<String> scannedItems = new ArrayList();
     public static JFrame frame = new JFrame("mainWindow");
     public static JFrame adminFrame = new JFrame("Admin Frame");
 
-
+    public static float currentPrice;
     public static Stock stock = new Stock();
-    private int count = 0;
+
+
 
     public MainForm() {
 
@@ -38,18 +39,9 @@ public class MainForm {
         txt_scan.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                super.keyTyped(e);
-
-                count = count + 1;
-                System.out.println(count);
-
-                if (count == 11) {
+                if (txt_scan.getText().length() == 10){
                     scanItem(txt_scan.getText());
-                    txt_scan.setText("");
-                    count = 0;
                 }
-
-
             }
         });
     }
@@ -62,6 +54,7 @@ public class MainForm {
             scannedItems.add(itemCode);
             txt_mainOutput.append(stock.storeStock.get(stockLocation).name +" (£" +stock.storeStock.get(stockLocation).price + ")\n");
             lb_currentPrice.setText("Total price: £" + currentPrice);
+            txt_scan.setText("");
             return;
         }
 
