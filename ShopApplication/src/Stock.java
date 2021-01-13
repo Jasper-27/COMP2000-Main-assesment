@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Stock {
+public final class Stock {
     public List<Item> storeStock = new ArrayList();
     public String dataFile = "Resources/stock.txt";
 
-
-//    public void order(List<String> toOrder){
-//        for(String string : toOrder){
-//            storeStock.get(findItem(string)).stock += -1;
-//        }
-//    }
 
     public boolean order(String toOrder){
         if (storeStock.get(findItem(toOrder)).stock < 1){
