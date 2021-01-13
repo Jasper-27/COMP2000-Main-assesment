@@ -45,8 +45,10 @@ public class MainForm {
 
                 if (count == 11) {
                     scanItem(txt_scan.getText());
+                    txt_scan.setText("");
                     count = 0;
                 }
+
 
             }
         });
@@ -60,10 +62,10 @@ public class MainForm {
             scannedItems.add(itemCode);
             txt_mainOutput.append(stock.storeStock.get(stockLocation).name +" (£" +stock.storeStock.get(stockLocation).price + ")\n");
             lb_currentPrice.setText("Total price: £" + currentPrice);
-            txt_scan.setText("");
             return;
         }
 
+        txt_scan.setText("");
         JOptionPane.showMessageDialog(null,"could not find item in stock"); //Shows a message if their is no stock left
     }
 
