@@ -12,9 +12,7 @@ public class PaymentForm {
 
     public PaymentForm() {
         btn_cashPay.addActionListener(e -> cashPay(txt_cashAmount.getText()));
-
         lb_currentPrice.setText("Owed: £" + MainForm.currentPrice);
-
         btn_cardPay.addActionListener(e -> cardPay());
     }
 

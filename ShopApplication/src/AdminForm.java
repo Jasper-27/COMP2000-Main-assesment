@@ -15,11 +15,11 @@ public class AdminForm {
     }
 
     public void fillStock(){
-        String stock = "";
+        StringBuilder stock = new StringBuilder();
         for(Item item : MainForm.stock.storeStock){
-            stock += item.name + "    |   " + item.stock + "\n";
+            stock.append(item.name).append("    |   ").append(item.stock).append("\n");
         }
-        textArea1.setText(stock);
+        textArea1.setText(stock.toString());
     }
 
     public void updateStock(){

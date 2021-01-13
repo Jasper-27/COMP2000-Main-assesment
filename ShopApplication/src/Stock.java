@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +9,29 @@ public class Stock {
     public String dataFile = "Resources/stock.txt";
 
 
-    public void order(List<String> toOrder){
-        for(String string : toOrder){
-            storeStock.get(findItem(string)).stock += -1;
+//    public void order(List<String> toOrder){
+//        for(String string : toOrder){
+//            storeStock.get(findItem(string)).stock += -1;
+//        }
+//    }
+
+    public boolean order(String toOrder){
+        if (storeStock.get(findItem(toOrder)).stock < 1){
+            JOptionPane.showMessageDialog(null,"Item out of stock");
+            return false;
+        }else{
+            storeStock.get(findItem(toOrder)).stock += -1;
+            return true;
         }
+    }
+
+    public Item getItem(String code){
+        for(Item item : storeStock){
+            if(item.code.equals(code)){
+                return item;
+            }
+        }
+        return null;
     }
 
     //Returns the position of the item in the array

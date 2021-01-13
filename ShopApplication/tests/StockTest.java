@@ -33,7 +33,7 @@ public class StockTest {
 
     @Test
     public void testOrder() throws Exception {
-        stock.order(scannedItems);
+        stock.order("0548618172");
         Stock stock2 = new Stock();
         assertNotEquals(stock, stock2);
     }

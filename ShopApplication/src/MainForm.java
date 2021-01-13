@@ -12,7 +12,6 @@ public class MainForm {
     private JTextArea txt_mainOutput;
     private JLabel lb_currentPrice;
 
-
     public static String company = "Company";
     public static List<String> scannedItems = new ArrayList();
     public static JFrame frame = new JFrame("mainWindow");
@@ -24,12 +23,8 @@ public class MainForm {
 
 
     public MainForm() {
-
-        txt_scan.requestFocus();
-
-
         btn_order.addActionListener(e -> {
-            stock.order(scannedItems);
+            //stock.order(scannedItems);
             frame.setContentPane(new PaymentForm().pnl_payment);
             frame.setTitle("Payment");
             frame.pack();
@@ -39,27 +34,29 @@ public class MainForm {
         txt_scan.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (txt_scan.getText().length() == 10){
+                if (txt_scan.getText().length() >= 10){
                     scanItem(txt_scan.getText());
+                    txt_scan.setText("");
                 }
             }
         });
     }
 
     public void scanItem(String itemCode){
-        System.out.println("scanned");
-        int stockLocation = stock.findItem(itemCode);
-        if (stockLocation > -1){        //Error checking to make sure the item was in stock
-            currentPrice += stock.storeStock.get(stockLocation).price;
+        Item item = stock.getItem(itemCode);
+        if (item == null){
+            JOptionPane.showMessageDialog(null,"could not find item in stock"); //Shows a message if their is no stock left
+            return;
+        }
+        if (stock.order(itemCode)){
+            //Error checking to make sure the item was in stock
+            currentPrice += item.price;
             scannedItems.add(itemCode);
-            txt_mainOutput.append(stock.storeStock.get(stockLocation).name +" (£" +stock.storeStock.get(stockLocation).price + ")\n");
+            txt_mainOutput.append(item.name +" (£" +item.price + ")\n");
             lb_currentPrice.setText("Total price: £" + currentPrice);
             txt_scan.setText("");
             return;
         }
-
-        txt_scan.setText("");
-        JOptionPane.showMessageDialog(null,"could not find item in stock"); //Shows a message if their is no stock left
     }
 
     public static void main(String[] args) {

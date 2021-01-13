@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -9,18 +8,14 @@ public class Admins {
     public List<Admin> admins = new ArrayList();
     public String dataFile = "Resources/admin.txt";
 
-    private static String salt = "023uro2jd0qwjd0d3209dj0qwd312djasperwashere123123";  //Used to add a bt more security
+    private static final String salt = "023uro2jd0qwjd0d3209dj0qwd312djasperwashere123123";  //Used to add a bt more security
 
     //Checks if the admin matches one in the file
     public boolean verifyAdmin(String username, String password){
         String hash1 = hash(password);
         String hash2 = getAdmin(username).passwordHash;
 
-        if (hash1.equals(hash2)){
-            return true;
-        }else{
-            return false;
-        }
+        return hash1.equals(hash2);
     }
 
     //Finds the admins username
@@ -40,11 +35,7 @@ public class Admins {
 
     //Check if the admin exists
     public boolean checkAdmin(String username){
-        if (getAdmin(username) == null){
-            return false;
-        }else {
-            return true;
-        }
+        return getAdmin(username) != null;
     }
 
     //loads the admin file
@@ -86,8 +77,7 @@ public class Admins {
                     'a', 'b', 'c', 'd', 'e', 'f' ,'g','h','i','j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
                     'A', 'B', 'C', 'D', 'E', 'F' ,'G','H','I','J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
             };
-            for (int i = 0; i < hashedBytes.length; i++) {
-                byte b = hashedBytes[i];
+            for (byte b : hashedBytes) {
                 hash.append(digits[(b & 0xf0) >> 4]);
                 hash.append(digits[b & 0x0f]);
             }
