@@ -23,7 +23,6 @@ public class AdminLoginForm {
             return;
         }
 
-
         if (admins.verifyAdmin(username, password)){
             AdminForm adminForm = new AdminForm();
             MainForm.adminFrame.setContentPane(adminForm.panel1);

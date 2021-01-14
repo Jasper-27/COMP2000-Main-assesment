@@ -5,17 +5,21 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 public final class Admins {
-    public List<Admin> admins = new     ArrayList();
+    public List<Admin> admins = new ArrayList();
     public String dataFile = "Resources/admin.txt";
 
     private static final String salt = "023uro2jd0qwjd0d3209dj0qwd312djasperwashere123123";  //Used to add a bt more security
 
     //Checks if the admin matches one in the file
     public boolean verifyAdmin(String username, String password){
-        String hash1 = hash(password);
-        String hash2 = Objects.requireNonNull(getAdmin(username)).passwordHash;
 
-        return hash1.equals(hash2);
+        if (checkAdmin(username)){  // This extra check admin so done to avoid errors in testing
+            String hash1 = hash(password);
+            String hash2 = Objects.requireNonNull(getAdmin(username)).passwordHash;
+
+            return hash1.equals(hash2);
+        }else {return false;}
+
     }
 
     //Finds the admins username
@@ -37,6 +41,7 @@ public final class Admins {
     public boolean checkAdmin(String username){
         return getAdmin(username) != null;
     }
+
 
     //loads the admin file
     public void loadFile(){

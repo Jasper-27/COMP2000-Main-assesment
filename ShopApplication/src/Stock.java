@@ -88,7 +88,5 @@ public final class Stock {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
